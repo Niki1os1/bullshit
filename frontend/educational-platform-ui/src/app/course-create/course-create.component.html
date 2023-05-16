@@ -1,0 +1,29 @@
+<div class="course-create">
+  <h2>Создание нового курса</h2>
+  <form (ngSubmit)="createCourse()" [formGroup]="data">
+    <div class="form-group">
+      <label for="title">Название курса</label>
+      <input type="text" id="title" formControlName="title" name="title" required>
+      <div *ngIf="data.controls['title'].invalid && (data.controls['title'].dirty || data.controls['title'].touched)">
+        <div *ngIf="data.controls['title'].errors?.['required']">Title is required.</div>
+        <div *ngIf="data.controls['title'].errors?.['pattern']">Title should contain only Cyrillic characters and be 3 to 100 characters long.</div>
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="category">Категория курса</label>
+      <input type="text" id="category" formControlName="category" name="category" required>
+      <div *ngIf="data.controls['category'].invalid && (data.controls['category'].dirty || data.controls['category'].touched)">
+        <div *ngIf="data.controls['category'].errors?.['required']">Category is required.</div>
+        <div *ngIf="data.controls['category'].errors?.['pattern']">Category should contain only Cyrillic characters and be 3 to 100 characters long.</div>
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="icon">Icon:</label>
+      <input id="icon" type="file" (change)="onFileSelected($event)" accept="image/*" required>
+      <div *ngIf="data.controls['file'].invalid && (data.controls['file'].dirty || data.controls['file'].touched)">
+        <div *ngIf="data.controls['file'].errors?.['required']">Icon is required.</div>
+      </div>
+    </div>
+    <button type="submit" mat-button color="primary">Создать курс</button>
+  </form>
+</div>

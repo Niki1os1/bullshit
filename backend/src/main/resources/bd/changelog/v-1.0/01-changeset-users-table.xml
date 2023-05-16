@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd
+        http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd
+        http://www.liquibase.org/xml/ns/pro http://www.liquibase.org/xml/ns/pro/liquibase-pro-latest.xsd">
+
+    <changeSet  id="01-create-users-table"  author="N1k">
+        <createTable  tableName="users">
+            <column  name="id"  type="serial"  autoIncrement="true">
+                <constraints primaryKeyName="users_pk" primaryKey="true"  nullable="false"/>
+            </column>
+            <column  name="username"  type="text">
+                <constraints unique="true" nullable="true"/>
+            </column>
+            <column  name="email"  type="text">
+                <constraints unique="true" nullable="false"/>
+            </column>
+            <column  name="password"  type="varchar(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column  name="lastname"  type="varchar(50)"/>
+            <column  name="firstname"  type="varchar(50)"/>
+        </createTable>
+
+        <createIndex tableName="users" indexName="users_username_index">
+            <column name="username"/>
+        </createIndex>
+
+        <rollback>
+            <dropTable tableName="users"/>
+        </rollback>
+
+    </changeSet>
+
+</databaseChangeLog>

@@ -1,0 +1,48 @@
+HELP.md
+target/
+!.mvn/wrapper/maven-wrapper.jar
+!**/src/main/**/target/
+!**/src/test/**/target/
+
+### STS ###
+.apt_generated
+.classpath
+.factorypath
+.project
+.settings
+.springBeans
+.sts4-cache
+
+### IntelliJ IDEA ###
+.idea
+.mvn
+*.iws
+*.iml
+*.ipr
+/backend/src/main/resources/application.properties
+/backend/src/main/resources/liquibase.properties
+
+### NetBeans ###
+/nbproject/private/
+/nbbuild/
+/dist/
+/nbdist/
+/.nb-gradle/
+build/
+!**/src/main/**/build/
+!**/src/test/**/build/
+.properties
+
+### VS Code ###
+.vscode/
+/frontend/target
+/frontend/node_modules
+frontend/eductional-platform-ui/.vscode
+
+
+/frontend/educational-platform-ui/node/
+/frontend/educational-platform-ui/dist
+/frontend/educational-platform-ui/.angular
+/frontend/educational-platform-ui/node_modules
+
+

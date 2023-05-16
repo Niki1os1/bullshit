@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd
+        http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd
+        http://www.liquibase.org/xml/ns/pro http://www.liquibase.org/xml/ns/pro/liquibase-pro-latest.xsd">
+
+    <changeSet id="31-create-video_tags-table" author="N1k">
+        <createTable tableName="video_tags">
+            <column name="id" type="serial">
+                <constraints primaryKeyName="video_tags_pk" primaryKey="true"  nullable="false"/>
+            </column>
+            <column name="video_id" type="integer">
+                <constraints foreignKeyName="FK_video_tags_video_id_video_id" references="video(id)" deleteCascade="true"/>
+            </column>
+            <column  name="title"  type="text">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <rollback>
+            <dropTable tableName="video_tags"/>
+        </rollback>
+
+    </changeSet>
+
+</databaseChangeLog>

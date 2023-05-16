@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd
+        http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd
+        http://www.liquibase.org/xml/ns/pro http://www.liquibase.org/xml/ns/pro/liquibase-pro-latest.xsd">
+
+    <!--USER-->
+    <include file="src/main/resources/bd/changelog/v-1.0/01-changeset-users-table.xml" />
+    <include file="src/main/resources/bd/changelog/v-1.0/10-changeset-roles-table.xml"/>
+    <include file="src/main/resources/bd/changelog/v-1.0/20-changeset-user_roles-table.xml"/>
+
+    <!--VIDEO-->
+    <include file="src/main/resources/bd/changelog/v-1.0/33-changeset-course-table.xml"/>
+    <include file="src/main/resources/bd/changelog/v-1.0/30-changeset-video-table.xml"/>
+    <include file="src/main/resources/bd/changelog/v-1.0/31-changeset-video_tags-table.xml"/>
+    <include file="src/main/resources/bd/changelog/v-1.0/32-changeset-video_comments-table.xml"/>
+
+
+
+
+
+</databaseChangeLog>

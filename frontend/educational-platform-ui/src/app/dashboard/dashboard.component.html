@@ -1,0 +1,50 @@
+<head>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
+</head>
+
+<div class="main-content">
+  <div class="container-fluid">
+    <div class="row">
+
+<!--      <div class="col-lg-3 col-md-6 col-sm-6">-->
+<!--        <div class="card card-stats">-->
+<!--          <div class="card-header card-header-warning card-header-icon">-->
+<!--            <div class="card-icon">-->
+<!--              <i class="material-icons">content_copy</i>-->
+<!--            </div>-->
+<!--            <p class="card-category">Естественные науки</p>-->
+<!--            <h3 class="card-title">Физика-->
+<!--            </h3>-->
+<!--          </div>-->
+<!--          <div class="card-footer">-->
+<!--            <div class="stats">-->
+<!--              <i class="material-symbols-outlined">fit_screen</i>-->
+<!--              <a mat-button href="/wiew-cources/1">Открыть курс</a>-->
+<!--            </div>-->
+<!--          </div>-->
+<!--        </div>-->
+<!--      </div>-->
+
+      <div class="col-lg-4 col-md-6 col-sm-6" *ngFor="let course of courses">
+        <div class="card card-stats">
+          <div  class="card-header  card-header-icon" [ngStyle]="getNextCardHeaderStyle">
+            <div class="card-icon">
+<!--              <i class="material-icons">{{ course.icon }}</i>-->
+              <img src=" {{course.icon}} " alt="Course icon">
+            </div>
+            <p class="card-category">{{ course.category }}</p>
+            <h3 class="card-title">{{ course.title }}
+            </h3>
+          </div>
+          <div class="card-footer">
+            <div class="stats">
+              <i class="material-symbols-outlined">fit_screen</i>
+              <a mat-button [routerLink]="['/wiew-cources', course.id]">Открыть курс</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+    </div>
+  </div>

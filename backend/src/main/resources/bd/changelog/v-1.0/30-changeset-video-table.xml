@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd
+        http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd
+        http://www.liquibase.org/xml/ns/pro http://www.liquibase.org/xml/ns/pro/liquibase-pro-latest.xsd">
+
+    <changeSet  id="30-create-video-table"  author="N1k">
+        <createTable  tableName="video">
+            <column  name="id"  type="serial"  autoIncrement="true">
+                <constraints primaryKeyName="video_pk" primaryKey="true"  nullable="false"/>
+            </column>
+            <column  name="title"  type="text">
+                <constraints nullable="false"/>
+            </column>
+            <column  name="description"  type="text"/>
+            <column  name="user_id"  type="integer">
+                <constraints foreignKeyName="FK_video_user_id_users_id" references="users(id)" deleteCascade="true"/>
+            </column>
+            <column  name="course_id"  type="integer">
+                <constraints foreignKeyName="FK_video_course_id_courses_id" references="course(id)" deleteCascade="true"/>
+            </column>
+            <column  name="video_url"  type="text">
+                <constraints unique="true" nullable="false"/>
+            </column>
+            <column  name="view_count"  type="integer">
+                <constraints  nullable="false"/>
+            </column>
+            <column  name="thumbnail_url"  type="text"/>
+        </createTable>
+
+        <createIndex tableName="video" indexName="users_video_url_index">
+            <column name="video_url"/>
+        </createIndex>
+
+        <rollback>
+            <dropTable tableName="video"/>
+        </rollback>
+
+    </changeSet>
+
+</databaseChangeLog>

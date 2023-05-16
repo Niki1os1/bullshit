@@ -1,0 +1,13 @@
+.card-footer .stats {
+  display: flex;
+  align-items: center;
+}
+img {
+  width: 6em;
+  height: 6em;
+}
+
+
+.card-footer .stats i {
+  margin-right: 10px;
+}
