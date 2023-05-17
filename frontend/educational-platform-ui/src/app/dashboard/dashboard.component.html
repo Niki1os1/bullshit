@@ -5,29 +5,21 @@
 <div class="main-content">
   <div class="container-fluid">
     <div class="row">
+      <form>
+        <div class="input-group no-border">
+          <input type="text" value="" class="form-control" placeholder="Search..." [formControl]="filter">
+<!--          <button mat-raised-button type="submit" class="btn btn-white btn-round btn-just-icon">-->
+<!--            <i class="material-icons">search</i>-->
+<!--            <div class="ripple-container"></div>-->
+<!--          </button>-->
+        </div>
+      </form>
+    </div>
 
-<!--      <div class="col-lg-3 col-md-6 col-sm-6">-->
-<!--        <div class="card card-stats">-->
-<!--          <div class="card-header card-header-warning card-header-icon">-->
-<!--            <div class="card-icon">-->
-<!--              <i class="material-icons">content_copy</i>-->
-<!--            </div>-->
-<!--            <p class="card-category">Естественные науки</p>-->
-<!--            <h3 class="card-title">Физика-->
-<!--            </h3>-->
-<!--          </div>-->
-<!--          <div class="card-footer">-->
-<!--            <div class="stats">-->
-<!--              <i class="material-symbols-outlined">fit_screen</i>-->
-<!--              <a mat-button href="/wiew-cources/1">Открыть курс</a>-->
-<!--            </div>-->
-<!--          </div>-->
-<!--        </div>-->
-<!--      </div>-->
-
-      <div class="col-lg-4 col-md-6 col-sm-6" *ngFor="let course of courses">
+    <div class="row">
+      <div class="col-lg-4 col-md-6 col-sm-6" *ngFor="let course of filteredCourses$ | async">
         <div class="card card-stats">
-          <div  class="card-header  card-header-icon" [ngStyle]="getNextCardHeaderStyle">
+          <div  class="card-header  card-header-icon">
             <div class="card-icon">
 <!--              <i class="material-icons">{{ course.icon }}</i>-->
               <img src=" {{course.icon}} " alt="Course icon">

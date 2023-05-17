@@ -15,9 +15,6 @@
                 <constraints nullable="false"/>
             </column>
             <column  name="description"  type="text"/>
-            <column  name="user_id"  type="integer">
-                <constraints foreignKeyName="FK_video_user_id_users_id" references="users(id)" deleteCascade="true"/>
-            </column>
             <column  name="course_id"  type="integer">
                 <constraints foreignKeyName="FK_video_course_id_courses_id" references="course(id)" deleteCascade="true"/>
             </column>

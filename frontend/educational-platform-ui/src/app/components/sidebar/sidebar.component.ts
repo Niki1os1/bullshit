@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {UserService} from "../../_services/user.service";
 
-
 declare const $: any;
 
 @Component({
@@ -15,21 +14,13 @@ export class SidebarComponent implements OnInit {
   constructor(private userService: UserService) { }
 
   public isTeacher(): boolean {
-    console.log(this.userRoles.includes('teacher'))
+    console.log(this.userRoles.includes('ROLE_TEACHER'))
 
-    return  this.userRoles.includes('teacher')
+    return  this.userRoles.includes('ROLE_TEACHER')
   }
 
   ngOnInit() {
-    this.userService.getUserRoles().subscribe(
-      roles => {
-        this.userRoles = roles;
-        console.log(this.userRoles.includes('ROLE_TEACHER')); // проверка наличия 'teacher' в массиве
-      },
-      error => {
-        // обработка ошибки
-      }
-    );
+    this.userRoles = this.userService.getRoles();
   }
   isMobileMenu() {
     if (window.innerWidth <= 991) {

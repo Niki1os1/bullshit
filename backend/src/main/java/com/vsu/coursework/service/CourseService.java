@@ -46,35 +46,32 @@ public class CourseService {
     public Course getCourseById(Long id) {
         return courseRepository.findById(id).orElse(null);
     }
-    public UploadFileResponse saveCourse(String category, String title, MultipartFile file) throws IOException {
 
-        // Prepare a key
-//        var filenameExtension = StringUtils.getFilenameExtension(courseRequest.getFile().getOriginalFilename());
-//
-//        String key = UUID.randomUUID() + "." + filenameExtension;
+    public List<Course> getCoursesByUserId(Long userId) {
+        return courseRepository.findByUserId(userId);
+    }
+    public UploadFileResponse saveCourse(Long userId, String category, String title, MultipartFile file) throws IOException {
 
         String fileName = StringUtils.cleanPath(file.getOriginalFilename());
 
-            // Check if the file's name contains invalid characters
-            if(fileName.contains("..")) {
-                throw new FileStorageException("Sorry! Filename contains invalid path sequence " + fileName);
-            }
+        if(fileName.contains("..")) {
+            throw new FileStorageException("Sorry! Filename contains invalid path sequence " + fileName);
+        }
 
-            // Copy file to the target location (Replacing existing file with the same name)
-            Path targetLocation = this.fileStorageLocation.resolve(fileName);
-            Files.copy(file.getInputStream(), targetLocation, StandardCopyOption.REPLACE_EXISTING);
-            String targetSubstring = "assets";
+        Path targetLocation = this.fileStorageLocation.resolve(fileName);
+        Files.copy(file.getInputStream(), targetLocation, StandardCopyOption.REPLACE_EXISTING);
+        String targetSubstring = "assets";
 
-            int startIndex = targetLocation.toString().indexOf(targetSubstring);
-            String trimmedPath = targetLocation.toString().substring(startIndex);
+        int startIndex = targetLocation.toString().indexOf(targetSubstring);
+        String trimmedPath = targetLocation.toString().substring(startIndex);
 
+        var course = new Course();
+        course.setUserId(userId);
+        course.setCategory(category);
+        course.setTitle(title);
+        course.setIcon(trimmedPath);
 
-            var course = new Course();
-            course.setCategory(category);
-            course.setTitle(title);
-            course.setIcon(trimmedPath);
-
-             courseRepository.save(course);
+        courseRepository.save(course);
 
         String fileDownloadUri = ServletUriComponentsBuilder.fromCurrentContextPath()
                 .path("/downloadFile/")

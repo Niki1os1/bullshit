@@ -11,6 +11,9 @@
             <column  name="id"  type="serial"  autoIncrement="true">
                 <constraints primaryKeyName="course_pk" primaryKey="true"  nullable="false"/>
             </column>
+            <column  name="user_id"  type="integer">
+                <constraints foreignKeyName="FK_course_user_id_users_id" references="users(id)" deleteCascade="true"/>
+            </column>
             <column  name="category"  type="text">
                 <constraints nullable="false"/>
             </column>

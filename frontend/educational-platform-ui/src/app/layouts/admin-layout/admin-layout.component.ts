@@ -30,8 +30,6 @@ export class AdminLayoutComponent {
     } else {
       document.getElementsByTagName('body')[0].classList.remove('perfect-scrollbar-off');
     }
-    // const elemMainPanel = <HTMLElement>document.querySelector('.main-panel');
-    //const elemSidebar = <HTMLElement>document.querySelector('.sidebar .sidebar-wrapper');
 
     this.location.subscribe((ev:PopStateEvent) => {
       this.lastPoppedUrl = ev.url;
@@ -49,14 +47,6 @@ export class AdminLayoutComponent {
           window.scrollTo(0, 0);
       }
     });
-    // // @ts-ignore
-    // this._router = this.router.events.pipe(filter(event => event instanceof NavigationEnd)).subscribe((event: NavigationEnd) => {
-    //   elemMainPanel.scrollTop = 0;
-    //   elemSidebar.scrollTop = 0;
-    // });
-
-    // let ps: PerfectScrollbar;
-    // ps = new PerfectScrollbar(elemSidebar);
 
 
     const window_width = $(window).width();
@@ -132,24 +122,7 @@ export class AdminLayoutComponent {
       }
     });
   }
-  ngAfterViewInit() {
-    //this.runOnRouteChange();
-    const elemMainPanel = <HTMLElement>document.querySelector('.main-panel');
-    const elemSidebar = <HTMLElement>document.querySelector('.sidebar .sidebar-wrapper');
 
-    let ps = new PerfectScrollbar(elemMainPanel);
-    ps = new PerfectScrollbar(elemSidebar);
-  }
-  // isMaps(path: string){
-  //   var titlee = this.location.prepareExternalUrl(this.location.path());
-  //   titlee = titlee.slice( 1 );
-  //   if(path == titlee){
-  //     return false;
-  //   }
-  //   else {
-  //     return true;
-  //   }
-  // }
   runOnRouteChange(): void {
     if (window.matchMedia(`(min-width: 960px)`).matches ) {
       const elemMainPanel = <HTMLElement>document.querySelector('.main-panel');
@@ -157,12 +130,4 @@ export class AdminLayoutComponent {
       ps.update();
     }
   }
-  // isMac(): boolean {
-  //   let bool = false;
-  //   if (navigator.platform.toUpperCase().indexOf('MAC') >= 0 || navigator.platform.toUpperCase().indexOf('IPAD') >= 0) {
-  //     bool = true;
-  //   }
-  //   return bool;
-  // }
-
 }

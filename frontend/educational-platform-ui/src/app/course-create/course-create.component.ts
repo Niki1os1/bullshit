@@ -3,6 +3,7 @@ import { Course } from '../_models/course.model';
 import {CourseService} from "../_services/course.service";
 import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
 import {Router} from "@angular/router";
+import {CookieService} from "ngx-cookie-service";
 
 @Component({
   selector: 'app-course-create',
@@ -18,11 +19,14 @@ export class CourseCreateComponent {
 
   constructor(private courseService : CourseService,
               private formBuilder: FormBuilder,
-              private router: Router) {
+              private router: Router,
+              private cookieService: CookieService
+  ) {
 
     this.data = this.formBuilder.group({
       category: ['', [Validators.required, Validators.pattern(/^[а-яА-Я\s]{5,100}$/)]],
-      title: ['', [Validators.required, Validators.pattern(/^[а-яА-Я\s]{5,100}$/)]]
+      title: ['', [Validators.required, Validators.pattern(/^[а-яА-Я\s]{5,100}$/)]],
+      userId : this.cookieService.get('id')
     });
   }
 
@@ -39,4 +43,11 @@ export class CourseCreateComponent {
       this.router.navigate(['/']);
     });
   }
+
+  // onUpload(event) {
+  //   this.messageService.add({ severity: 'info', summary: 'Success', detail: 'File Uploaded with Basic Mode' });
+  // }
+  // onUpload($event: any) {
+  //   this.messageService.add({ severity: 'info', summary: 'Success', detail: 'File Uploaded with Basic Mode' });
+  // }
 }

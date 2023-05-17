@@ -23,6 +23,10 @@ import {VgControlsModule} from "@videogular/ngx-videogular/controls";
 import {VgOverlayPlayModule} from "@videogular/ngx-videogular/overlay-play";
 import {VgBufferingModule} from "@videogular/ngx-videogular/buffering";
 import {MatSnackBarModule} from "@angular/material/snack-bar";
+import { DecimalPipe, LowerCasePipe } from '@angular/common';
+import {DialogContentExampleDialog} from "../../my-course/my-course.component";
+import {MatDialogModule} from "@angular/material/dialog";
+
 
 @NgModule({
   imports: [
@@ -46,6 +50,7 @@ import {MatSnackBarModule} from "@angular/material/snack-bar";
     VgOverlayPlayModule,
     VgBufferingModule,
     MatSnackBarModule,
+    MatDialogModule,
   ],
   declarations: [
     DashboardComponent,
@@ -53,7 +58,12 @@ import {MatSnackBarModule} from "@angular/material/snack-bar";
     DashboardComponent,
     UserProfileComponent,
     CourseCreateComponent,
-  ]
+    DialogContentExampleDialog
+
+  ],
+  providers: [
+    DecimalPipe,
+    LowerCasePipe]
 })
 
 export class AdminLayoutModule {}

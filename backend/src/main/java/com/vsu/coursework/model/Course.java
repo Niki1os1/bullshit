@@ -19,13 +19,16 @@ public class Course {
     @Column(name = "category")
     private String category;
 
+    @Column(name = "userId")
+    private Long userId;
+
     @Column(name = "title")
     private String title;
 
     @Column(name = "icon")
     private String icon;
 
-    public Course(String category, String title, String icon) {
+    public Course(int userId, String category, String title, String icon) {
         this.category = category;
         this.title = title;
         this.icon = icon;

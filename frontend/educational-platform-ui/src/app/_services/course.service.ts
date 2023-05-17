@@ -19,11 +19,17 @@ export class CourseService {
     return this.http.get<Course>(url);
   }
 
-  createCourse(data : {category : string, title : string}, file: File): Observable<any> {
+  getCourseByUserId(userId: number): Observable<Course[]> {
+    const url = `${this.apiUrl}/my/${userId}`;
+    return this.http.get<Course[]>(url);
+  }
+
+  createCourse(data : {category : string, title : string, userId : string}, file: File): Observable<any> {
     const formData = new FormData()
     formData.append('file', file, file.name)
     formData.append('category', data.category)
     formData.append('title', data.title)
+    formData.append('userId', data.userId)
 
     return this.http.post(this.apiUrl, formData);
   }

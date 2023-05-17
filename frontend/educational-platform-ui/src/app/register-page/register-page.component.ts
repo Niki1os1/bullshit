@@ -15,7 +15,7 @@ export class RegisterPageComponent {
   constructor(
     private formBuilder: FormBuilder,
     private authService: AuthService,
-    private router: Router
+    private router: Router,
   ) {
 
     this.registerForm = this.formBuilder.group({

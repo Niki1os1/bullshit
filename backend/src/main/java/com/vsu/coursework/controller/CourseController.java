@@ -28,17 +28,23 @@ public class CourseController {
 
     @GetMapping("/{id}")
     public ResponseEntity<Course> getCourseById(@PathVariable Long id) {
-        Course course = courseService.getCourseById(id);
-        if (course != null) {
-            return new ResponseEntity<>(course, HttpStatus.OK);
+        Course courses = courseService.getCourseById(id);
+        return new ResponseEntity<>(courses, HttpStatus.OK);
+    }
+
+    @GetMapping("/my/{userId}")
+    public ResponseEntity<List<Course>> getCourseByUserId(@PathVariable Long userId) {
+        List<Course> courses = courseService.getCoursesByUserId(userId);
+        if (!courses.isEmpty()) {
+            return new ResponseEntity<>(courses, HttpStatus.OK);
         } else {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
 
     @PostMapping
-    public UploadFileResponse createCourse(@Valid @RequestParam("category") String category, @RequestParam("title") String title, @RequestParam("file") MultipartFile file) throws IOException {
-        return courseService.saveCourse(category, title, file);
+    public UploadFileResponse createCourse(@Valid @RequestParam("userId") String userId, @RequestParam("category") String category, @RequestParam("title") String title, @RequestParam("file") MultipartFile file) throws IOException {
+        return courseService.saveCourse(Long.parseLong(userId), category, title, file);
     }
 
     @DeleteMapping("/{id}")
