@@ -87,8 +87,9 @@ public class WebSecurityConfig { // extends WebSecurityConfigurerAdapter {
                 .antMatchers("/api/auth/registration").permitAll() //hasRole("ADMIN")
                 .antMatchers("/api/auth/login").permitAll()
 
-                .antMatchers("/api/user/**").authenticated()
+                .antMatchers("/api/user/**").permitAll()
                 .antMatchers("/api/test/**").permitAll()
+                .antMatchers("/api/courses").permitAll()
                 .antMatchers("/api/courses/**").hasAnyRole("ADMIN", "TEACHER")
                 .anyRequest().authenticated();
 

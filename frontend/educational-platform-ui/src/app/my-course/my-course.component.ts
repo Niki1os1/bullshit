@@ -19,6 +19,14 @@ export class MyCourseComponent implements AfterViewInit{
   ) {
   }
 
+
+  // uploadVideo(course: Course) {
+  //   this.courseService.uploadVideo(course.id)
+  // }
+  // uploadVideo(id: number) {
+  //   this.courseService.uploadVideo(id);
+  // }
+
   openDialog(course: Course) {
     const dialogRef = this.dialog.open(DialogContentExampleDialog, {
       data: course

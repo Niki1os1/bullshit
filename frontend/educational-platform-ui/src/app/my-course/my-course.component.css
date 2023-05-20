@@ -8,3 +8,11 @@ button {
   height: 200px; /* Задайте желаемую высоту изображения */
   object-fit: cover; /* Изображение сохраняет пропорции и заполняет контейнер */
 }
+
+a + button {
+  margin-left: 10px;
+}
+
+.container-fluid .row {
+  margin-bottom: 20px;
+}

@@ -26,6 +26,11 @@ import {MatSnackBarModule} from "@angular/material/snack-bar";
 import { DecimalPipe, LowerCasePipe } from '@angular/common';
 import {DialogContentExampleDialog} from "../../my-course/my-course.component";
 import {MatDialogModule} from "@angular/material/dialog";
+import {UploadVideoComponent} from "../../upload-video/upload-video.component";
+import {SaveVideoDetailsComponent} from "../../save-video-details/save-video-details.component";
+import {VideoOfTheCourseComponent} from "../../video-of-the-course/video-of-the-course.component";
+import {VideoCardComponent} from "../../video-card/video-card.component";
+import {MatCardModule} from "@angular/material/card";
 
 
 @NgModule({
@@ -51,6 +56,7 @@ import {MatDialogModule} from "@angular/material/dialog";
     VgBufferingModule,
     MatSnackBarModule,
     MatDialogModule,
+    MatCardModule,
   ],
   declarations: [
     DashboardComponent,
@@ -58,7 +64,11 @@ import {MatDialogModule} from "@angular/material/dialog";
     DashboardComponent,
     UserProfileComponent,
     CourseCreateComponent,
-    DialogContentExampleDialog
+    UploadVideoComponent,
+    SaveVideoDetailsComponent,
+    DialogContentExampleDialog,
+    VideoOfTheCourseComponent,
+    VideoCardComponent
 
   ],
   providers: [

@@ -8,6 +8,6 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class UploadVideoResponse {
-    private String videoId;
+    private Long videoId;
     private String videoUrl;
 }

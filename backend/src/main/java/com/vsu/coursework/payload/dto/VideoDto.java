@@ -12,7 +12,7 @@ import java.util.Set;
 @AllArgsConstructor
 @NoArgsConstructor
 public class VideoDto {
-    private String id;
+    private Long id;
     private String title;
     private String description;
     private Set<Tag> tags;

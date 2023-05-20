@@ -19,7 +19,7 @@ public class Course {
     @Column(name = "category")
     private String category;
 
-    @Column(name = "userId")
+    @Column(name = "user_id")
     private Long userId;
 
     @Column(name = "title")

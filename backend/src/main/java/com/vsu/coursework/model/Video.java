@@ -19,7 +19,7 @@ public class Video {
     @Id
     @javax.persistence.Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private String id;
+    private Long id;
 
     @Column(name = "title")
     private String title;
@@ -27,8 +27,8 @@ public class Video {
     @Column(name = "description")
     private String description;
 
-    @Column(name = "user_id")
-    private String userId;
+    @Column(name = "course_id")
+    private Long courseId;
 
     @OneToMany
     @JoinColumn(name = "video_id")

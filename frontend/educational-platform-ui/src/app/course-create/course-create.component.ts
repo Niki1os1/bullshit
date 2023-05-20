@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { Course } from '../_models/course.model';
 import {CourseService} from "../_services/course.service";
 import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
 import {Router} from "@angular/router";
@@ -40,14 +39,7 @@ export class CourseCreateComponent {
   createCourse() {
     const data = this.data.value;
     this.courseService.createCourse( data, this.selectedFile).subscribe(() => {
-      this.router.navigate(['/']);
+      this.router.navigate(['/my-course']);
     });
   }
-
-  // onUpload(event) {
-  //   this.messageService.add({ severity: 'info', summary: 'Success', detail: 'File Uploaded with Basic Mode' });
-  // }
-  // onUpload($event: any) {
-  //   this.messageService.add({ severity: 'info', summary: 'Success', detail: 'File Uploaded with Basic Mode' });
-  // }
 }

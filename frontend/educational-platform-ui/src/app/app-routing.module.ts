@@ -23,12 +23,6 @@ const routes: Routes = [
       loadChildren: () => import('./layouts/admin-layout/admin-layout.module').then(m => m.AdminLayoutModule)
     }]
   },
-  {
-    path: 'upload-video', component: UploadVideoComponent,
-  },
-  {
-    path: 'save-video-details/:videoId', component: SaveVideoDetailsComponent,
-  },
 
   {
     path: 'registration', component: RegisterPageComponent,

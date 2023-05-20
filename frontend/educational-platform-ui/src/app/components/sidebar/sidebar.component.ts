@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {UserService} from "../../_services/user.service";
+import {AuthService} from "../../_services/auth.service";
 
 declare const $: any;
 
@@ -14,13 +15,21 @@ export class SidebarComponent implements OnInit {
   constructor(private userService: UserService) { }
 
   public isTeacher(): boolean {
-    console.log(this.userRoles.includes('ROLE_TEACHER'))
-
     return  this.userRoles.includes('ROLE_TEACHER')
   }
 
+  isAuthorized(): boolean {
+    return !this.userService.getToken();
+  }
   ngOnInit() {
-    this.userRoles = this.userService.getRoles();
+    this.userService.getRoles().subscribe(
+      roles => {
+        this.userRoles = roles;
+      },
+      error => {
+        console.log('Error retrieving user roles: ', error);
+      }
+    );
   }
   isMobileMenu() {
     if (window.innerWidth <= 991) {
@@ -28,4 +37,6 @@ export class SidebarComponent implements OnInit {
     }
     return true;
   };
+
+
 }

@@ -38,4 +38,10 @@ export class CourseService {
     const url = `${this.apiUrl}/${id}`;
     return this.http.delete<void>(url);
   }
+
+  // uploadVideo(courseId: number) : Observable<any>{
+  //   const url = `${this.apiUrl}/my/${userId}`;
+  //   return this.http.get<Course[]>(url);
+  // }
+
 }

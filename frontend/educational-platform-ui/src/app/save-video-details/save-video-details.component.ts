@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {FormControl, FormGroup} from "@angular/forms";
 import {MatChipEditedEvent, MatChipInputEvent} from "@angular/material/chips";
 import {COMMA, ENTER} from '@angular/cdk/keycodes';
-import {ActivatedRoute} from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
 import {VideoService} from "../_services/video.service";
 import {MatSnackBar} from "@angular/material/snack-bar";
 
@@ -29,7 +29,8 @@ export class SaveVideoDetailsComponent implements OnInit {
   videoId = '';
 
   constructor(private activatedRoute: ActivatedRoute, private videoService: VideoService,
-              private matSnackBar: MatSnackBar) {
+              private matSnackBar: MatSnackBar,
+              private router: Router,) {
     this.activatedRoute.params.subscribe(params => this.videoId= params['videoId']);
     this.saveVideoDetailsForm = new FormGroup({
       title: this.title,
@@ -89,6 +90,7 @@ export class SaveVideoDetailsComponent implements OnInit {
         console.log(data);
         //show un upload success notification
         this.matSnackBar.open("Thumbnail Upload Successful", "OK");
+        // this.router.navigateByUrl("/save-video-details/" + data.videoId);
       });
   }
 }

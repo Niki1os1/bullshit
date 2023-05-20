@@ -1,20 +1,26 @@
 <div class="main-content">
   <div class="container-fluid">
     <div class="row">
-
       <div class="col-lg-4 col-md-6 col-sm-6" *ngFor="let course of courses">
-<!--      *ngFor="let course of filteredCourses$ | async-->
-    <mat-card  class="example-card">
-  <mat-card-header>
-    <mat-card-title>{{course.title}}</mat-card-title>
-    <mat-card-subtitle>{{course.category}}</mat-card-subtitle>
-  </mat-card-header>
-  <img mat-card-image src="{{course.icon}}" alt="Icon course" class="course-image">
-  <mat-card-actions>
-    <button mat-button>LIKE</button>
-    <button mat-raised-button color="warn" (click)="openDialog(course)">Удалить курс</button>
-  </mat-card-actions>
-</mat-card>
+        <mat-card  class="example-card">
+          <mat-card-header>
+            <a href="/course/{{course.id}}/videos">
+              <mat-card-title>{{course.title}}</mat-card-title>
+              <mat-card-subtitle>{{course.category}}</mat-card-subtitle>
+            </a>
+          </mat-card-header>
+          <img mat-card-image src="{{course.icon}}" alt="Icon course" class="course-image">
+          <mat-card-actions>
+            <a mat-raised-button color="accent" href="/upload-video/{{course.id}}">Добавить видео</a>
+<!--            (click)="uploadVideo(course.id)"-->
+            <button mat-raised-button color="warn" (click)="openDialog(course)">Удалить курс</button>
+          </mat-card-actions>
+        </mat-card>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-lg-4 col-md-6 col-sm-6">
+        <a mat-raised-button color="primary" href="/course-create">Создать курс</a>
       </div>
     </div>
   </div>

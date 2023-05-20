@@ -4,6 +4,9 @@ import { DashboardComponent } from '../../dashboard/dashboard.component';
 import { UserProfileComponent } from '../../user-profile/user-profile.component';
 import {CourseCreateComponent} from "../../course-create/course-create.component";
 import {MyCourseComponent} from "../../my-course/my-course.component";
+import {UploadVideoComponent} from "../../upload-video/upload-video.component";
+import {SaveVideoDetailsComponent} from "../../save-video-details/save-video-details.component";
+import {VideoOfTheCourseComponent} from "../../video-of-the-course/video-of-the-course.component";
 
 export const AdminLayoutRoutes: Routes = [
     { path: '',      component: DashboardComponent },
@@ -14,4 +17,13 @@ export const AdminLayoutRoutes: Routes = [
   {
       path: 'my-course', component: MyCourseComponent
     },
+  {
+    path: 'upload-video/:courseId', component: UploadVideoComponent,
+  },
+  {
+    path: 'save-video-details/:videoId', component: SaveVideoDetailsComponent,
+  },
+  {
+    path: 'course/:courseId/videos', component: VideoOfTheCourseComponent,
+  },
 ];
