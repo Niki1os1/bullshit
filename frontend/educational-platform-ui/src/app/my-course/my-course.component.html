@@ -1,8 +1,8 @@
 <div class="main-content">
   <div class="container-fluid">
     <div class="row">
-      <div class="col-lg-4 col-md-6 col-sm-6" *ngFor="let course of courses">
-        <mat-card  class="example-card">
+      <div class="col-lg-6 col-md-6 col-sm-6" *ngFor="let course of courses">
+        <mat-card  class="example-card mb-4">
           <mat-card-header>
             <a href="/course/{{course.id}}/videos">
               <mat-card-title>{{course.title}}</mat-card-title>
@@ -11,9 +11,8 @@
           </mat-card-header>
           <img mat-card-image src="{{course.icon}}" alt="Icon course" class="course-image">
           <mat-card-actions>
-            <a mat-raised-button color="accent" href="/upload-video/{{course.id}}">Добавить видео</a>
-<!--            (click)="uploadVideo(course.id)"-->
-            <button mat-raised-button color="warn" (click)="openDialog(course)">Удалить курс</button>
+            <a fxFlex="50%" mat-raised-button color="accent" href="/upload-video/{{course.id}}">Добавить видео</a>
+            <button fxFlex="50%" mat-raised-button color="warn" (click)="openDialog(course)">Удалить курс</button>
           </mat-card-actions>
         </mat-card>
       </div>

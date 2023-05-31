@@ -17,6 +17,12 @@ public class VideoController {
 
     private final VideoService videoService;
 
+    @GetMapping("/video/{videoId}")
+    @ResponseStatus(HttpStatus.OK)
+    public VideoDto getVideoDetails(@PathVariable String videoId) {
+        return videoService.getVideoDetails(videoId);
+    }
+
     @GetMapping("/{courseId}")
     @ResponseStatus(HttpStatus.OK)
     public List<VideoDto> getAllVideos(@PathVariable Long courseId) {

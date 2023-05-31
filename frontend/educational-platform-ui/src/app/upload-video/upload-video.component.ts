@@ -67,6 +67,12 @@ export class UploadVideoComponent {
     console.log(event);
   }
 
+  clearVideo() {
+    this.files = [];
+    this.fileEntry = undefined;
+    this.fileUploaded = false;
+  }
+
   uploadVideo() {
     if(this.fileEntry !== undefined){
       this.fileEntry.file(file => {

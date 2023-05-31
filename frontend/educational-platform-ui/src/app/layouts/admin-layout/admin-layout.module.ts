@@ -18,19 +18,23 @@ import {MatToolbarModule} from "@angular/material/toolbar";
 import {MatIconModule} from "@angular/material/icon";
 import {FlexLayoutModule} from "@angular/flex-layout";
 import {MatChipsModule} from "@angular/material/chips";
-import {VgCoreModule} from "@videogular/ngx-videogular/core";
-import {VgControlsModule} from "@videogular/ngx-videogular/controls";
-import {VgOverlayPlayModule} from "@videogular/ngx-videogular/overlay-play";
-import {VgBufferingModule} from "@videogular/ngx-videogular/buffering";
 import {MatSnackBarModule} from "@angular/material/snack-bar";
 import { DecimalPipe, LowerCasePipe } from '@angular/common';
-import {DialogContentExampleDialog} from "../../my-course/my-course.component";
+import {DialogContentExampleDialog, MyCourseComponent} from "../../my-course/my-course.component";
 import {MatDialogModule} from "@angular/material/dialog";
 import {UploadVideoComponent} from "../../upload-video/upload-video.component";
 import {SaveVideoDetailsComponent} from "../../save-video-details/save-video-details.component";
 import {VideoOfTheCourseComponent} from "../../video-of-the-course/video-of-the-course.component";
 import {VideoCardComponent} from "../../video-card/video-card.component";
 import {MatCardModule} from "@angular/material/card";
+import {AppModule} from "../../app.module";
+import {VideoPlayerComponent} from "../../video-player/video-player.component";
+import {VgControlsModule} from "@videogular/ngx-videogular/controls";
+import {VgCoreModule} from "@videogular/ngx-videogular/core";
+import {VgOverlayPlayModule} from "@videogular/ngx-videogular/overlay-play";
+import {VgBufferingModule} from "@videogular/ngx-videogular/buffering";
+import {CourseVideosComponent} from "../../course-videos/course-videos.component";
+
 
 
 @NgModule({
@@ -50,13 +54,17 @@ import {MatCardModule} from "@angular/material/card";
     MatInputModule,
     ReactiveFormsModule,
     MatChipsModule,
+    MatSnackBarModule,
+    MatDialogModule,
+    MatCardModule,
+    // AppModule,
+    MatCardModule,
     VgCoreModule,
     VgControlsModule,
     VgOverlayPlayModule,
     VgBufferingModule,
-    MatSnackBarModule,
-    MatDialogModule,
-    MatCardModule,
+    MatTooltipModule
+
   ],
   declarations: [
     DashboardComponent,
@@ -68,8 +76,14 @@ import {MatCardModule} from "@angular/material/card";
     SaveVideoDetailsComponent,
     DialogContentExampleDialog,
     VideoOfTheCourseComponent,
-    VideoCardComponent
+    VideoCardComponent,
+    MyCourseComponent,
+    VideoPlayerComponent,
+    CourseVideosComponent
 
+  ],
+  exports: [
+    VideoPlayerComponent
   ],
   providers: [
     DecimalPipe,

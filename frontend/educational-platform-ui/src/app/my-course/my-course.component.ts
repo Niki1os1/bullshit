@@ -1,8 +1,9 @@
-import {AfterViewInit, Component} from '@angular/core';
+import {AfterViewInit, Component, OnInit} from '@angular/core';
 import {Course} from "../_models/course.model";
 import {CourseService} from "../_services/course.service";
 import { CookieService } from 'ngx-cookie-service';
 import {MatDialog} from "@angular/material/dialog";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-my-course',
@@ -14,6 +15,7 @@ export class MyCourseComponent implements AfterViewInit{
   constructor(
     private courseService: CourseService,
     private cookieService : CookieService,
+    private router: Router,
     public dialog: MatDialog
 
   ) {
@@ -35,9 +37,7 @@ export class MyCourseComponent implements AfterViewInit{
     dialogRef.afterClosed().subscribe(result => {
       if (result === 'confirm') {
         this.courseService.deleteCourse(course.id).subscribe(() => {
-          // Курс успешно удален
-        }, error => {
-          // Обработка ошибки удаления курса
+          window.location.reload();
         });
       }
     });

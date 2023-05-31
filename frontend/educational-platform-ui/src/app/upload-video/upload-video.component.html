@@ -2,32 +2,32 @@
   <div class="container-fluid">
     <div class="row">
       <div class="center">
-        <ngx-file-drop dropZoneLabel="Drop files here" (onFileDrop)="dropped($event)"
+        <ngx-file-drop dropZoneLabel="Drop files here" accept="video/mp4" (onFileDrop)="dropped($event)"
                  (onFileOver)="fileOver($event)" (onFileLeave)="fileLeave($event)">
           <ng-template ngx-file-drop-content-tmp let-openFileSelector="openFileSelector">
             Перетащите видео в этот раздел (или).
             <div class="row">
-              <button mat-raised-button type="button" (click)="openFileSelector()">Browse Files</button>
+              <button mat-button type="button" (click)="openFileSelector()">Выбрать файл</button>
             </div>
           </ng-template>
         </ngx-file-drop>
-      <div class="upload-table">
-        <table class="table">
-          <thead>
-            <tr>
-              <th>Name</th>
-           </tr>
+        <div class="upload-table">
+          <table class="table">
+           <thead>
+              <tr>
+                <th>Выбранный файл:</th>
+             </tr>
           </thead>
-          <tbody class="upload-name-style">
-            <tr *ngFor="let item of files; let i=index">
-              <td><strong>{{ item.relativePath }}</strong></td>
-            </tr>
-          </tbody>
-        </table>
-  </div>
-
-  <button mat-button (click)="uploadVideo()" *ngIf="fileUploaded">Upload Video</button>
-</div>
-</div>
+           <tbody class="upload-name-style">
+              <tr *ngFor="let item of files; let i=index">
+               <td><strong>{{ item.relativePath }}</strong></td>
+              </tr>
+           </tbody>
+          </table>
+        </div>
+        <button mat-raised-button color="primary" (click)="uploadVideo()" *ngIf="fileUploaded">Загрузить видео</button>
+        <button class="upload-button" mat-raised-button color="warn" (click)="clearVideo()" *ngIf="fileUploaded">Очистить выбор</button>
+      </div>
+    </div>
   </div>
 </div>

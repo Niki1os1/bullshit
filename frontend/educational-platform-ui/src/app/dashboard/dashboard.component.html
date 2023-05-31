@@ -17,7 +17,7 @@
     </div>
 
     <div class="row">
-      <div class="col-lg-4 col-md-6 col-sm-6" *ngFor="let course of filteredCourses$ | async">
+      <div class="col-lg-6 col-md-6 col-sm-6" *ngFor="let course of filteredCourses$ | async">
         <div class="card card-stats">
           <div  class="card-header  card-header-icon">
             <div class="card-icon">
@@ -31,7 +31,7 @@
           <div class="card-footer">
             <div class="stats">
               <i class="material-symbols-outlined">fit_screen</i>
-              <a mat-button [routerLink]="['/wiew-cources', course.id]">Открыть курс</a>
+              <a mat-button [routerLink]="['/view-courses', course.id]">Открыть курс</a>
             </div>
           </div>
         </div>

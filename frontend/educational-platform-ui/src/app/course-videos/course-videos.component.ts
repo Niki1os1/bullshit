@@ -1,16 +1,14 @@
 import {Component, OnInit} from '@angular/core';
-import {VideoService} from "../_services/video.service";
 import {VideoDto} from "../_models/video-dto";
+import {VideoService} from "../_services/video.service";
 import {ActivatedRoute} from "@angular/router";
 
-
 @Component({
-  selector: 'app-video-of-the-course',
-  templateUrl: './video-of-the-course.component.html',
-  styleUrls: ['./video-of-the-course.component.css']
+  selector: 'app-course-videos',
+  templateUrl: './course-videos.component.html',
+  styleUrls: ['./course-videos.component.css']
 })
-export class VideoOfTheCourseComponent implements OnInit{
-
+export class CourseVideosComponent implements OnInit{
   courseId: string | null | undefined;
   featuredVideos: Array<VideoDto> = [];
 
@@ -27,5 +25,4 @@ export class VideoOfTheCourseComponent implements OnInit{
       })
     }
   }
-
 }

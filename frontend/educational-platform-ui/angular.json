@@ -29,8 +29,8 @@
               "./node_modules/@videogular/ngx-videogular/fonts/videogular.css",
               "src/styles.css",
               "src/assets/scss/material-dashboard.scss",
-              "src/assets/css/demo.css"
-
+              "src/assets/css/demo.css",
+              "node_modules/@videogular/ngx-videogular/fonts/videogular.css"
             ],
             "scripts": [
             ]

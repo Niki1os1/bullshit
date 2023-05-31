@@ -6,7 +6,6 @@
       </div>
       <div *ngIf="featuredVideos.length==0">
         <p>В данном курсе нет видеокурсов.
-        <a [routerLink]="['/upload-video', courseId]">Добавить видео.</a></p>
       </div>
       <div fxLayout="row wrap" fxLayoutGap="12px grid">
         <div fxFlex="33%" *ngFor="let featuredVideo of featuredVideos">

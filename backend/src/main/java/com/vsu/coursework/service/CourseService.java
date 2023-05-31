@@ -17,6 +17,8 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
 import java.util.List;
+import java.util.Optional;
+import java.util.UUID;
 
 @Service
 public class CourseService {
@@ -52,7 +54,12 @@ public class CourseService {
     }
     public UploadFileResponse saveCourse(Long userId, String category, String title, MultipartFile file) throws IOException {
 
-        String fileName = StringUtils.cleanPath(file.getOriginalFilename());
+        String originalFilename = file.getOriginalFilename();
+        String fileExtension = StringUtils.getFilenameExtension(originalFilename);
+
+        String randomFileName = UUID.randomUUID() + "." + fileExtension;
+
+        String fileName = StringUtils.cleanPath(randomFileName);
 
         if(fileName.contains("..")) {
             throw new FileStorageException("Sorry! Filename contains invalid path sequence " + fileName);
@@ -82,7 +89,12 @@ public class CourseService {
                 file.getContentType(), file.getSize());
     }
 
-    public void deleteCourse(Long id) {
+    public void deleteCourse(Long id) throws IOException {
+        Optional<Course> deletedCourse = courseRepository.findById(id);
+        Path path = Paths.get(fileStorageLocation.normalize().toString());
+        if (deletedCourse.get().getIcon()!=null) {
+            Files.delete(Paths.get(String.valueOf(path.getParent().getParent().getParent().resolve(deletedCourse.get().getIcon()))));
+        }
         courseRepository.deleteById(id);
     }
 }

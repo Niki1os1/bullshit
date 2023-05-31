@@ -1,13 +1,15 @@
 package com.vsu.coursework.service;
 
+import com.vsu.coursework.model.Video;
 import com.vsu.coursework.payload.dto.UploadVideoResponse;
 import com.vsu.coursework.payload.dto.VideoDto;
-import com.vsu.coursework.model.Video;
 import com.vsu.coursework.repository.VideoRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.net.URL;
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -70,4 +72,44 @@ public class VideoService {
     public List<VideoDto> getAllVideos(Long courseId) {
         return videoRepository.findByCourseId(courseId).stream().map(this::mapToVideoDto).toList();
     }
+
+    public VideoDto getVideoDetails(String videoId) {
+        Video savedVideo = getVideoById(Long.parseLong(videoId));
+
+        return mapToVideoDto(savedVideo);
+    }
+
+    private static String extractFileNameFromUrl(String url) {
+        try {
+            URL fileUrl = new URL(url);
+            String path = fileUrl.getPath();
+            String[] parts = path.split("/");
+            return parts[parts.length - 1];
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public void deleteVideoInCourse(Long courseId){
+        ArrayList<String> keys = new ArrayList<>();
+        List<Video> deletedVideo= videoRepository.findByCourseId(courseId);
+        for(Video video : deletedVideo){
+            if(video.getVideoUrl()!=null) {
+                keys.add(extractFileNameFromUrl(video.getVideoUrl()));
+            }
+            if(video.getThumbnailUrl()!=null) {
+                keys.add(extractFileNameFromUrl(video.getThumbnailUrl()));
+            }
+        }
+        if(!keys.isEmpty()) {
+            s3Service.deleteObjectsFromBucket(keys);
+        }
+        videoRepository.deleteAll(deletedVideo);
+    }
+
+    public void deleteVideoById(){
+
+    }
+
 }

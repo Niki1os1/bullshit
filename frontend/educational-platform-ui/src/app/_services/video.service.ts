@@ -27,6 +27,14 @@ export class VideoService {
     return this.httpClient.post<UploadVideoResponse>("http://localhost:7777/api/videos/"+courseId, formData)
   }
 
+  getVideo(videoId: string): Observable<VideoDto> {
+    return this.httpClient.get<VideoDto>("http://localhost:7777/api/videos/video/" + videoId);
+  }
+
+  saveVideo(videoMetaData: VideoDto) {
+    return this.httpClient.put<VideoDto>("http://localhost:7777/api/videos", videoMetaData);
+  }
+
   uploadThumbnail(fileEntry: File, videoId : string): Observable<string>{
 
     const formData = new FormData();
@@ -39,6 +47,4 @@ export class VideoService {
       responseType: 'text'
     });
   }
-
-
 }

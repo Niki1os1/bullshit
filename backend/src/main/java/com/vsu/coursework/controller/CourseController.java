@@ -3,6 +3,7 @@ package com.vsu.coursework.controller;
 import com.vsu.coursework.model.Course;
 import com.vsu.coursework.payload.response.UploadFileResponse;
 import com.vsu.coursework.service.CourseService;
+import com.vsu.coursework.service.VideoService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -18,6 +19,9 @@ import java.util.List;
 public class CourseController {
     @Autowired
     private CourseService courseService;
+
+    @Autowired
+    private VideoService videoService;
 
 
     @GetMapping
@@ -48,7 +52,8 @@ public class CourseController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteCourse(@PathVariable Long id) {
+    public ResponseEntity<Void> deleteCourse(@PathVariable Long id) throws IOException {
+        videoService.deleteVideoInCourse(id);
         courseService.deleteCourse(id);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }

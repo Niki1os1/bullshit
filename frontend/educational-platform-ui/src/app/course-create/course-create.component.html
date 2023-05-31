@@ -1,30 +1,54 @@
-<div class="course-create">
-  <h2>Создание нового курса</h2>
-  <form (ngSubmit)="createCourse()" [formGroup]="data">
-    <div class="form-group">
-      <label for="title">Название курса</label>
-      <input type="text" id="title" formControlName="title" name="title" required>
-      <div *ngIf="data.controls['title'].invalid && (data.controls['title'].dirty || data.controls['title'].touched)">
-        <div *ngIf="data.controls['title'].errors?.['required']">Title is required.</div>
-        <div *ngIf="data.controls['title'].errors?.['pattern']">Title should contain only Cyrillic characters and be 3 to 100 characters long.</div>
-      </div>
-    </div>
-    <div class="form-group">
-      <label for="category">Категория курса</label>
-      <input type="text" id="category" formControlName="category" name="category" required>
-      <div *ngIf="data.controls['category'].invalid && (data.controls['category'].dirty || data.controls['category'].touched)">
-        <div *ngIf="data.controls['category'].errors?.['required']">Category is required.</div>
-        <div *ngIf="data.controls['category'].errors?.['pattern']">Category should contain only Cyrillic characters and be 3 to 100 characters long.</div>
-      </div>
-    </div>
-    <div class="form-group">
-      <label for="icon">Icon:</label>
+<div class="main-content">
+  <div class="container-fluid">
+    <div class="course-create">
+      <h2>Создание нового курса</h2>
+      <form (ngSubmit)="createCourse()" [formGroup]="data">
+        <div class="form-group">
+<!--      <label for="title">Название курса</label>-->
+<!--      <input type="text" id="title" formControlName="title" name="title" required>-->
+          <mat-form-field class="example-full-width">
+            <mat-label>Название курса</mat-label>
+            <input type="text" matInput formControlName="title" name="title" [errorStateMatcher]="matcherTitle" required>
+            <mat-hint>Введите название курса</mat-hint>
+            <mat-error *ngIf="data.controls['title'].errors?.['pattern']">Введите название курса на русском(от 5 символов)!
+            </mat-error>
+            <mat-error *ngIf="data.controls['title'].errors?.['required']">Название курса <strong>обязательно</strong>
+            </mat-error>
+          </mat-form-field>
+        </div>
 
-      <input id="icon" type="file" (change)="onFileSelected($event)" accept="image/*" required>
-<!--      <div *ngIf="data.controls['file'].invalid && (data.controls['file'].dirty || data.controls['file'].touched)">-->
-<!--        <div *ngIf="data.controls['file'].errors?.['required']">Icon is required.</div>-->
-<!--      </div>-->
+        <div class="form-group">
+          <mat-form-field class="example-full-width">
+            <mat-label>Категория курса</mat-label>
+            <input type="text" matInput formControlName="category" name="category" [errorStateMatcher]="matcherCategory" required>
+            <mat-hint>Введите категорию курса</mat-hint>
+            <mat-error *ngIf="data.controls['category'].errors?.['pattern']">Введите категорию курса на русском(от 5 символов)!
+            </mat-error>
+            <mat-error *ngIf="data.controls['category'].errors?.['required']">Категория курса <strong>обязательно</strong>
+            </mat-error>
+          </mat-form-field>
+        </div>
+
+        <div class="file-input-container">
+          <table class="table">
+            <thead>
+            <tr>
+              <th>Выбранная иконка курса:</th>
+            </tr>
+            </thead>
+            <tbody class="upload-name-style">
+            <tr>
+              <td><strong>{{ selectedFileName }}</strong></td>
+            </tr>
+            </tbody>
+          </table>
+          <input id="icon" style="display: none;" type="file" (change)="onFileSelected($event)" accept="image/*" required>
+          <button *ngIf="!fileSelected" mat-button type="button" (click)="selectFile()">Выбрать файл</button>
+          <button *ngIf="fileSelected" mat-button type="button" (click)="clearFile()">Очистить выбор</button>
+        </div>
+        <button type="submit" mat-button color="primary" [disabled]="!fileSelected || data.invalid">Создать курс</button>
+      </form>
     </div>
-    <button type="submit" mat-button color="primary">Создать курс</button>
-  </form>
+  </div>
 </div>
+
