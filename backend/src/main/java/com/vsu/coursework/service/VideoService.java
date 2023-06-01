@@ -40,18 +40,20 @@ public class VideoService {
         return new UploadVideoResponse(savedVideo.getId(), savedVideo.getVideoUrl());
     }
 
-    public VideoDto editVideo(VideoDto videoDto) {
-        //Find the video by videoId
+    public void editVideo(VideoDto videoDto) {
         Video savedVideo = getVideoById(videoDto.getId());
-        //Map the video fields to video
-        savedVideo.setTitle(videoDto.getTitle());
-        savedVideo.setDescription(videoDto.getDescription());
-        savedVideo.setTags(videoDto.getTags());
-        savedVideo.setThumbnailUrl(videoDto.getThumbnailUrl());
 
-        //save the video to the database
-        videoRepository.save(savedVideo);
-        return videoDto;
+        if (savedVideo != null) {
+            savedVideo.setTitle(videoDto.getTitle());
+            savedVideo.setDescription(videoDto.getDescription());
+            savedVideo.setTags(videoDto.getTags());
+            savedVideo.setThumbnailUrl(videoDto.getThumbnailUrl());
+
+            videoRepository.save(savedVideo);
+        } else {
+            // Handle the case when the video is not found
+            throw new IllegalArgumentException("Video not found");
+        }
     }
 
     public String uploadThumbnail(MultipartFile file, Long videoId) {

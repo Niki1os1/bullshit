@@ -25,9 +25,6 @@ export class UserService {
     return decodedToken.username;
   }
 
-  getUserById() {
-
-  }
 
   getToken(): string | undefined {
     const token = localStorage.getItem('token');
@@ -35,9 +32,20 @@ export class UserService {
   }
 
 
-
   getRoles(): Observable<string[]> {
     return this.http.get<string[]>(`${this.API_URL}/role`);
+  }
+
+  editUser(editData: Partial<{ username: string, email: string, first_name: string, last_name: string }>, userId : string){
+    return this.http.put(`${this.API_URL}/edit-user/${userId}`, editData);
+  }
+
+  getUserById(userId : string){
+    return this.http.get<User>(`${this.API_URL}/${userId}`);
+  }
+
+  getAllUser(){
+    // return this.http.get<User>(`${this.API_URL}/user/${userId}`);
   }
 
 }

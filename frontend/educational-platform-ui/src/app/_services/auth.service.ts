@@ -31,7 +31,7 @@ login(credentials: { username: string, password: string }): Observable<any> {
         localStorage.setItem('token', response.token)
         // this.cookieService.set('roles', JSON.stringify(response.roles));
         // this.cookieService.set('email', response.email)
-        // this.cookieService.set('id', String(response.id))
+        localStorage.setItem('id', String(response.id))
       }),
       map(response => response.token)
     );
