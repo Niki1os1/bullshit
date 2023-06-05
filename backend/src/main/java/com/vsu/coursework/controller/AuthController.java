@@ -86,41 +86,17 @@ import java.util.stream.Collectors;
                     .body(new MessageResponse("Error: Email is already in use!"));
         }
 
-        // Create new user's account
         User user = new User(signUpRequest.getUsername(),
                 signUpRequest.getEmail(),
                 encoder.encode(signUpRequest.getPassword()));
 
-        String[] strRoles = signUpRequest.getRole();
-        Set<Role> roles = new HashSet<>();
+        Set<Role> role = new HashSet<>();
 
-        if (strRoles == null) {
-            Role userRole = roleRepository.findByName(ERole.ROLE_STUDENT)
-                    .orElseThrow(() -> new RuntimeException("Error: Role is not found."));
-            roles.add(userRole);
-        } else {
-            for (String strRole : strRoles) {
-                switch (strRole) {
-                    case "admin" -> {
-                        Role adminRole = roleRepository.findByName(ERole.ROLE_ADMIN)
-                                .orElseThrow(() -> new RuntimeException("Error: Role is not found."));
-                        roles.add(adminRole);
-                    }
-                    case "teacher" -> {
-                        Role modRole = roleRepository.findByName(ERole.ROLE_TEACHER)
-                                .orElseThrow(() -> new RuntimeException("Error: Role is not found."));
-                        roles.add(modRole);
-                    }
-                    default -> {
-                        Role userRole = roleRepository.findByName(ERole.ROLE_STUDENT)
-                                .orElseThrow(() -> new RuntimeException("Error: Role is not found."));
-                        roles.add(userRole);
-                    }
-                }
-            }
-        }
+        Role userRole = roleRepository.findByName(ERole.ROLE_STUDENT)
+                .orElseThrow(() -> new RuntimeException("Error: Role is not found."));
+        role.add(userRole);
 
-        user.setRoles(roles);
+        user.setRoles(role);
         userRepository.save(user);
 
         return ResponseEntity.ok(new MessageResponse("User registered successfully!"));

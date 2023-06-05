@@ -8,20 +8,14 @@
       <form>
         <div class="input-group no-border">
           <input type="text" value="" class="form-control" placeholder="Поиск..." [formControl]="filter">
-<!--          <button mat-raised-button type="submit" class="btn btn-white btn-round btn-just-icon">-->
-<!--            <i class="material-icons">search</i>-->
-<!--            <div class="ripple-container"></div>-->
-<!--          </button>-->
         </div>
       </form>
     </div>
-
     <div class="row">
       <div class="col-lg-6 col-md-6 col-sm-6" *ngFor="let course of filteredCourses$ | async">
         <div class="card card-stats">
           <div  class="card-header  card-header-icon">
             <div class="card-icon">
-<!--              <i class="material-icons">{{ course.icon }}</i>-->
               <img src=" {{course.icon}} " alt="Course icon">
             </div>
             <p class="card-category">{{ course.category }}</p>
@@ -36,7 +30,6 @@
           </div>
         </div>
       </div>
-
     </div>
     </div>
   </div>

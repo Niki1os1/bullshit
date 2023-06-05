@@ -1,3 +1,7 @@
+<header>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+</header>
+
 <div class="main-content">
   <div class="container-fluid">
     <div class="row">
@@ -10,7 +14,36 @@
       </div>
       <div fxLayout="row wrap" fxLayoutGap="12px grid">
         <div fxFlex="33%" *ngFor="let featuredVideo of featuredVideos">
-          <app-video-card [video]="featuredVideo"></app-video-card>
+          <mat-card class="example-card" routerLink="/video-details/{{featuredVideo.id}}">
+            <div class="card-header">
+              <div class="image-container">
+                <img mat-card-image [src]="featuredVideo.thumbnailUrl" alt="Thumbnail">
+              </div>
+              <div class="icon-container">
+                <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu"
+                        (click)="openMenu($event, featuredVideo.id)"
+                         >
+                  <i class="icon material-symbols-outlined">more_vert</i>
+                </button>
+                <mat-menu #menu="matMenu">
+                  <a class="link-without-underline" href="course/{{courseId}}/view-answer/{{featuredVideo.id}}">
+                    <button mat-menu-item>
+                      <mat-icon>dialpad</mat-icon>
+                      <span>Посмотреть ответы</span>
+                    </button>
+                  </a>
+                  <button mat-menu-item (click)="openDialog(featuredVideo.id)">
+                    <mat-icon>delete</mat-icon>
+                    <span>Удалить видеокурс</span>
+                  </button>
+                </mat-menu>
+              </div>
+            </div>
+            <mat-card-header>
+              <mat-card-title>{{featuredVideo.title}}</mat-card-title>
+              <mat-card-subtitle>{{featuredVideo.description}}</mat-card-subtitle>
+            </mat-card-header>
+          </mat-card>
         </div>
       </div>
     </div>

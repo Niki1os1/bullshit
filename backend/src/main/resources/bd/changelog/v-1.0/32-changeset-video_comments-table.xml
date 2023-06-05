@@ -14,10 +14,15 @@
             <column name="video_id" type="integer">
                 <constraints foreignKeyName="FK_video_comments_video_id_video_id" references="video(id)" deleteCascade="true"/>
             </column>
-            <column  name="text"  type="text">
+            <column  name="file_url"  type="text">
+                <constraints nullable="false"/>
+            </column>
+            <column  name="date_upload"  type="dateTime">
                 <constraints nullable="false"/>
             </column>
             <column  name="author_id"  type="integer"/>
+
+            <column  name="evaluation"  type="integer"/>
         </createTable>
 
         <rollback>

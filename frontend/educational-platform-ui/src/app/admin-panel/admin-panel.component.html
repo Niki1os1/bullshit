@@ -1,0 +1,97 @@
+<header>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,1,0" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,1,0" />
+</header>
+
+<div class="main-content">
+  <div class="container-fluid">
+    <table class="table table-striped">
+      <thead>
+      <tr>
+        <th scope="col" (click)="sortById()">
+          <div class="column-header">
+            <span class="column-title">#</span>
+            <span>
+              <mat-icon *ngIf="currentSortColumn === 'id' && sortDirection === 'asc'">arrow_upward</mat-icon>
+              <mat-icon *ngIf="currentSortColumn === 'id' && sortDirection === 'desc'">arrow_downward</mat-icon>
+            </span>
+          </div>
+        </th>
+        <th scope="col" (click)="sortByLogin()">
+          <div class="column-header">
+            <span class="column-title">Login</span>
+            <span>
+              <mat-icon *ngIf="currentSortColumn === 'login' && sortDirection === 'asc'">arrow_upward</mat-icon>
+              <mat-icon *ngIf="currentSortColumn === 'login' && sortDirection === 'desc'">arrow_downward</mat-icon>
+            </span>
+          </div>
+        </th>
+        <th scope="col" (click)="sortByEmail()">
+          <div class="column-header">
+            <span class="column-title">Email</span>
+            <span>
+              <mat-icon *ngIf="currentSortColumn === 'email' && sortDirection === 'asc'">arrow_upward</mat-icon>
+              <mat-icon *ngIf="currentSortColumn === 'email' && sortDirection === 'desc'">arrow_downward</mat-icon>
+            </span>
+          </div>
+        </th>
+        <th class="bold" scope="col">Роли пользователя</th>
+        <th class="bold" scope="col">Добавить/удалить роль</th>
+        <th class="bold" scope="col">Изменить</th>
+        <th class="bold" scope="col">Удалить</th>
+        <!--        <th scope="col">Оценка</th>-->
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let user of pageSlice">
+        <th scope="row">{{ user.id }}</th>
+        <td class="fixed-width">
+          <span matTooltip="{{ user.username }}">{{ user.username }}</span>
+        </td>
+        <td class="fixed-width">
+          <span matTooltip="{{ user.email }}">{{ user.email }}</span>
+        </td>
+        <td>
+          {{ user.roles }}
+        </td>
+        <td >
+          <mat-form-field>
+            <mat-label>Выбрать роль</mat-label>
+            <mat-select multiple id="role"  [(value)]="user.selectedRoles">
+              <mat-option  value="ROLE_TEACHER">Teacher</mat-option>
+              <mat-option value="ROLE_ADMIN">ADMIN</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </td>
+        <td>
+          <button mat-icon-button aria-label="Изменить роли пользователя"
+                  (click)="editRoleUserById(user.id, user.selectedRoles)"
+          >
+            <i class="icon material-symbols-outlined">person_add</i>
+          </button>
+      </td>
+        <td>
+          <button mat-icon-button aria-label="Удалить пользователя"
+                  (click)="deleteUserById(user.id)"
+          >
+            <i class="icon material-symbols-outlined">delete</i>
+          </button>
+      </td>
+      </tr>
+      </tbody>
+    </table>
+    <div class="d-flex justify-content-between p-2">
+
+      <mat-paginator #paginator
+                     class="demo-paginator"
+                     (page)="handlePageEvent($event)"
+                     [length]="collectionSize"
+                     [pageSize]="pageSize"
+                     [pageSizeOptions]="pageSizeOptions"
+
+                     aria-label="Select page">
+      </mat-paginator>
+
+    </div>
+  </div>
+</div>

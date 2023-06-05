@@ -1,16 +1,21 @@
 package com.vsu.coursework.service;
 
-import com.vsu.coursework.model.Video;
-import com.vsu.coursework.payload.dto.UploadVideoResponse;
+import com.vsu.coursework.model.*;
+import com.vsu.coursework.payload.dto.AnswerDto;
 import com.vsu.coursework.payload.dto.VideoDto;
+import com.vsu.coursework.payload.response.UploadCommentResponse;
+import com.vsu.coursework.payload.response.UploadVideoResponse;
+import com.vsu.coursework.repository.CommentRepository;
 import com.vsu.coursework.repository.VideoRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.net.URL;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -18,6 +23,7 @@ public class VideoService {
 
     private final S3Service s3Service;
     private final VideoRepository videoRepository;
+    private final CommentRepository commentRepository;
 
     private VideoDto mapToVideoDto(Video videoById) {
         VideoDto videoDto = new VideoDto();
@@ -29,6 +35,19 @@ public class VideoService {
         videoDto.setTags(videoById.getTags());
 
         return videoDto;
+    }
+
+    private AnswerDto mapToAnswerDto(Comment answerById) {
+        AnswerDto answerDto = new AnswerDto();
+        answerDto.setId(answerById.getId());
+        answerDto.setAuthorId(answerById.getAuthorId());
+        answerDto.setDate_upload(answerById.getDateUpload().toString());
+        answerDto.setFile_url(answerById.getFileUrl());
+        if (answerById.getEvaluation() != null) {
+            answerDto.setEvaluation(answerById.getEvaluation().toString());
+        }
+
+        return answerDto;
     }
     public UploadVideoResponse uploadVideo(String courseId, MultipartFile multipartFile){
         String videoUrl = s3Service.uploadFile(multipartFile);
@@ -110,8 +129,41 @@ public class VideoService {
         videoRepository.deleteAll(deletedVideo);
     }
 
-    public void deleteVideoById(){
-
+    public void deleteVideoById(String videoId){
+        videoRepository.deleteById(Long.parseLong(videoId));
     }
 
+    public UploadCommentResponse uploadAnswer(String videoId, String date_upload, String authorId, MultipartFile file) {
+        String videoUrl = s3Service.uploadFile(file);
+        var answer = new Comment();
+        answer.setDateUpload(Timestamp.valueOf(date_upload));
+        answer.setAuthorId(Integer.parseInt(authorId));
+        answer.setVideoId(Long.parseLong(videoId));
+        answer.setFileUrl(videoUrl);
+
+        var savedAnswer = commentRepository.save(answer);
+        return new UploadCommentResponse(savedAnswer.getId(), savedAnswer.getFileUrl());
+    }
+
+    public List<AnswerDto> getAnswersByVideoId(String videoId) {
+        return commentRepository.findByVideoId(Long.parseLong(videoId)).stream().map(this::mapToAnswerDto).toList();
+    }
+
+    public List<AnswerDto> getAnswerVideoByUserId(String videoId, String userId) {
+        return commentRepository.findByVideoIdAndAuthorId(Long.parseLong(videoId), Integer.parseInt(userId)).stream().map(this::mapToAnswerDto).toList();
+    }
+
+    public String editEvaluationUserById(String answerId, String selectedEvaluation) {
+        Optional<Comment> existingCommentOptional = commentRepository.findById(Long.parseLong(answerId));
+        Comment savedAnswer = existingCommentOptional.orElse(null);
+
+        if(savedAnswer!= null) {
+            savedAnswer.setEvaluation(Integer.parseInt(selectedEvaluation));
+
+            commentRepository.save(savedAnswer);
+            return savedAnswer.getId().toString();
+        }
+
+        return null;
+    }
 }

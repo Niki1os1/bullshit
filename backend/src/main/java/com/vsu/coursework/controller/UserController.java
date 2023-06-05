@@ -3,7 +3,6 @@ package com.vsu.coursework.controller;
 import com.vsu.coursework.payload.dto.UserDto;
 import com.vsu.coursework.service.UserService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.HttpStatus;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -31,17 +30,32 @@ public class UserController {
         return roles;
     }
 
+    @PutMapping("/edit-user/{userId}")
+    public Long editUser(@PathVariable String userId, @RequestBody UserDto userDto){
+        return userService.editUser(userId, userDto);
+    }
+
+    @PutMapping("/edit-user/{userId}/role")
+    public Long editRoleUserById(@PathVariable String userId, @RequestBody String[] role){
+        return userService.editRoleUserById(userId, role);
+    }
+
     @GetMapping("/{userId}")
     public UserDto getUserById(@PathVariable String userId) {
         return userService.getUserDetails(userId);
     }
 
-
-    @PutMapping("/edit-user/{userId}")
-    @ResponseStatus(HttpStatus.OK)
-    public void editVideoMetadata(@RequestBody UserDto userDto, @PathVariable String userId){
-
-        userService.editUser(userId, userDto);
+    @DeleteMapping("/{userId}")
+    public Long deleteUserById(@PathVariable String userId) {
+        return userService.deleteUserById(userId);
     }
+
+    @GetMapping("/all")
+    public List<UserDto> getAllUsers() {
+        return userService.getAllUsers();
+    }
+
+
+
 }
 

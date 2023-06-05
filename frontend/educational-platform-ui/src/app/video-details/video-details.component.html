@@ -3,38 +3,83 @@
     <div fxLayout="row">
       <div fxFlex="65%" class="video-detail">
         <div fxLayout="column" fxLayoutGap="8px">
-          <app-video-player *ngIf="videoAvailable" [videoUrl]="videoUrl"></app-video-player>
+          <app-video-player *ngIf="videoAvailable" ></app-video-player>
+<!--          [videoUrl]="videoUrl"-->
           <mat-card-title>{{videoTitle}}</mat-card-title>
-<!--          <div fxLayout="row">-->
-<!--            <div fxFlex="50%">-->
-<!--              <span class="video-upload-date">Apr 13, 2021</span>-->
-<!--            </div>-->
-<!--            <div fxFlex="50%" fxLayoutAlign="end">-->
-<!--          <span class="like-dislike-section">-->
-<!--              <button mat-icon-button class="thumbs-up">-->
-<!--&lt;!&ndash;                (click)="likeVideo()"&ndash;&gt;-->
-<!--                <mat-icon>thumb_up_off_alt</mat-icon>-->
-<!--                {{likeCount}}-->
-<!--              </button>-->
-<!--              <button mat-icon-button class="thumbs-down" >-->
-<!--&lt;!&ndash;                (click)="disLikeVideo()"&ndash;&gt;-->
-<!--                <mat-icon>thumb_down_off_alt</mat-icon>-->
-<!--                {{dislikeCount}}-->
-<!--              </button>-->
-<!--          </span>-->
-<!--            </div>-->
-<!--          </div>-->
           <mat-divider></mat-divider>
-          <mat-card-header>
-            <mat-card-title>Programming Techie</mat-card-title>
-            <mat-card-subtitle class="subtitles">4.2K Subscribers</mat-card-subtitle>
-          </mat-card-header>
+<!--          <mat-card-header>-->
+<!--            <mat-card-title>Programming Techie</mat-card-title>-->
+<!--            <mat-card-subtitle class="subtitles">4.2K Subscribers</mat-card-subtitle>-->
+<!--          </mat-card-header>-->
           <div>{{videoDescription}}</div>
           <mat-divider></mat-divider>
-          <mat-chip-list>
-            <mat-chip>Spring Boot</mat-chip>
-            <mat-chip>Angular</mat-chip>
-          </mat-chip-list>
+
+          <div fxLayout="row">
+            <table class="table table-striped">
+              <thead>
+              <tr>
+                <th scope="col">
+                  <div class="column-header">
+                    <span class="column-title">#</span>
+                  </div>
+                </th>
+
+                <th scope="col">
+                  <div class="column-header">
+                    <span class="column-title">Дата отправки</span>
+                  </div>
+                </th>
+                <th scope="col">Ссылка на ответ</th>
+                <th scope="col">Оценка</th>
+              </tr>
+              </thead>
+              <tbody>
+              <tr *ngFor="let answer of answers">
+                <th scope="row">{{ answer.id }}</th>
+                <td>
+                  {{ answer.date_upload }}</td>
+
+                <td><a class="half-hidden-link" href="{{ answer.file_url }}">{{ answer.file_url }}</a></td>
+                <td>
+<!--                  {{ answer.evaluation }}-->
+                </td>
+              </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <mat-card-title>Добавить новый ответ</mat-card-title>
+
+          <div class="row">
+            <div class="center">
+              <ngx-file-drop dropZoneLabel="Drop files here" (onFileDrop)="dropped($event)"
+                             (onFileOver)="fileOver($event)" (onFileLeave)="fileLeave($event)">
+                <ng-template ngx-file-drop-content-tmp let-openFileSelector="openFileSelector">
+                  Перетащите файл с ответом в этот раздел (или).
+                  <div class="row">
+                    <button mat-button type="button" (click)="openFileSelector()">Выбрать файл</button>
+                  </div>
+                </ng-template>
+              </ngx-file-drop>
+              <div class="upload-table">
+                <table class="table">
+                  <thead>
+                  <tr>
+                    <th>Выбранный файл:</th>
+                  </tr>
+                  </thead>
+                  <tbody class="upload-name-style">
+                  <tr *ngFor="let item of file; let i=index">
+                    <td><strong>{{ item.relativePath }}</strong></td>
+                  </tr>
+                  </tbody>
+                </table>
+              </div>
+              <button mat-raised-button color="primary" (click)="uploadAnswer()" *ngIf="fileUploaded">Загрузить ответ</button>
+              <button class="upload-button" mat-raised-button color="warn" (click)="clearAnswer()" *ngIf="fileUploaded">Очистить выбор</button>
+            </div>
+          </div>
+
           <mat-divider></mat-divider>
 <!--          <app-comments *ngIf="videoAvailable" [videoId]="videoId"></app-comments>-->
         </div>

@@ -36,8 +36,16 @@ export class UserService {
     return this.http.get<string[]>(`${this.API_URL}/role`);
   }
 
-  editUser(editData: Partial<{ username: string, email: string, first_name: string, last_name: string }>, userId : string){
-    return this.http.put(`${this.API_URL}/edit-user/${userId}`, editData);
+  editUser(editData: { username: string, email: string, first_name: string, last_name: string }, userId : string){
+
+    return this.http.put("http://localhost:7777/api/user/edit-user/"+ userId, editData).subscribe(
+      (response: any) => {
+        console.log("Успешно отредактирован пользователь.");
+      },
+      (error: any) => {
+        console.error("Ошибка при редактировании пользователя:", error);
+      }
+    );
   }
 
   getUserById(userId : string){
@@ -45,7 +53,14 @@ export class UserService {
   }
 
   getAllUser(){
-    // return this.http.get<User>(`${this.API_URL}/user/${userId}`);
+    return this.http.get<User[]>(`${this.API_URL}/all`);
   }
 
+  editRoleUserById(userId: number, selectedRoles: string[])  {
+    return this.http.put(`${this.API_URL}/edit-user/${userId}/role`, selectedRoles);
+  }
+
+  deleteUserById(userId: number) {
+    return this.http.delete(`${this.API_URL}/${userId}`);
+  }
 }

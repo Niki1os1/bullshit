@@ -20,6 +20,10 @@ export class NavbarComponent implements OnInit {
     this.$layer  = document.getElementsByClassName('close-layer')[0];
   }
 
+  back(){
+    history.back();
+  }
+
   ngOnInit(){
     const navbar: HTMLElement = this.element.nativeElement;
     this.toggleButton = navbar.getElementsByClassName('navbar-toggler')[0];

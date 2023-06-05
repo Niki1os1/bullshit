@@ -7,7 +7,10 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class UploadVideoResponse {
-    private Long videoId;
-    private String videoUrl;
+public class AnswerDto {
+    private Long id;
+    private String file_url;
+    private String date_upload;
+    private Integer authorId;
+    private String evaluation;
 }

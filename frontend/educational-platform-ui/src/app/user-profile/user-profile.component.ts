@@ -73,8 +73,35 @@ export class UserProfileComponent implements OnInit{
   }
 
   editUser() {
-    const editData = this.editForm.value;
+    const editData: any = {};
+
+    if (this.editForm.value.username) {
+      editData.username = this.editForm.value.username;
+    }
+    else
+      editData.username = this.getUsername()
+
+    if (this.editForm.value.email) {
+      editData.email = this.editForm.value.email;
+    }
+    else
+      editData.email = this.getEmail()
+
+    if (this.editForm.value.last_name) {
+      editData.last_name = this.editForm.value.last_name;
+    }
+    else
+      editData.last_name = this.getLastName()
+
+    if (this.editForm.value.first_name) {
+      editData.first_name = this.editForm.value.first_name;
+    }
+    else
+      editData.first_name = this.getFirstName()
+
     if(this.userId!=null)
       this.userService.editUser(editData, this.userId);
+
+    window.location.reload();
   }
 }

@@ -1,32 +1,10 @@
+<div class="sidebar">
 <div class="logo">
   <a mat-button href="/" class="simple-text">
     Educational platform
   </a>
 </div>
 <div class="sidebar-wrapper">
-<!--  <div *ngIf="isMobileMenu()">-->
-<!--    <form class="navbar-form">-->
-<!--      <span class="bmd-form-group">-->
-<!--        <div class="input-group no-border">-->
-<!--          <input type="text" value="" class="form-control" placeholder="Search...">-->
-<!--          <button mat-raised-button type="submit" class="btn btn-white btn-round btn-just-icon">-->
-<!--            <i class="material-icons">search</i>-->
-<!--            <div class="ripple-container"></div>-->
-<!--          </button>-->
-<!--        </div>-->
-<!--      </span>-->
-<!--    </form>-->
-<!--    <ul class="nav navbar-nav nav-mobile-menu">-->
-<!--      <li class="nav-item">-->
-<!--        <a class="nav-link" href="javascript:void(0)">-->
-<!--          <i class="material-icons">dashboard</i>-->
-<!--          <p>-->
-<!--            <span class="d-lg-none d-md-block">Stats</span>-->
-<!--          </p>-->
-<!--        </a>-->
-<!--      </li>-->
-<!--    </ul>-->
-<!--  </div>-->
   <ul class="nav">
     <li>
       <a mat-button color="warn" href="/">
@@ -34,6 +12,11 @@
         <span>Главная</span>
       </a>
     </li>
+    <li *ngIf="isAdmin()">
+      <a mat-button color="warn" href="/admin">
+        <i class="material-icons">settings</i>
+        <span>Админ панель</span>
+      </a>
     <li *ngIf="isTeacher()">
       <a mat-button color="warn" href="/my-course">
         <i class="material-icons">collections_bookmark</i>
@@ -65,4 +48,5 @@
 <!--      </a>-->
 <!--    </li>-->
   </ul>
+</div>
 </div>

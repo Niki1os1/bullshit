@@ -24,7 +24,10 @@ import {DialogContentExampleDialog, MyCourseComponent} from "../../my-course/my-
 import {MatDialogModule} from "@angular/material/dialog";
 import {UploadVideoComponent} from "../../upload-video/upload-video.component";
 import {SaveVideoDetailsComponent} from "../../save-video-details/save-video-details.component";
-import {VideoOfTheCourseComponent} from "../../video-of-the-course/video-of-the-course.component";
+import {
+  DialogContentDeleteVideoDialog,
+  VideoOfTheCourseComponent
+} from "../../video-of-the-course/video-of-the-course.component";
 import {VideoCardComponent} from "../../video-card/video-card.component";
 import {MatCardModule} from "@angular/material/card";
 import {AppModule} from "../../app.module";
@@ -34,6 +37,15 @@ import {VgCoreModule} from "@videogular/ngx-videogular/core";
 import {VgOverlayPlayModule} from "@videogular/ngx-videogular/overlay-play";
 import {VgBufferingModule} from "@videogular/ngx-videogular/buffering";
 import {CourseVideosComponent} from "../../course-videos/course-videos.component";
+import {MatMenuModule} from "@angular/material/menu";
+import {
+  PaginatorOverviewExample,
+  ViewAnswerComponent
+} from "../../view-answer/view-answer.component";
+import {MatPaginatorModule} from "@angular/material/paginator";
+import {AdminPanelComponent, DialogContentDeleteUserDialog} from "../../admin-panel/admin-panel.component";
+import {RatingModule} from "ngx-bootstrap/rating";
+
 
 
 
@@ -63,7 +75,10 @@ import {CourseVideosComponent} from "../../course-videos/course-videos.component
     VgControlsModule,
     VgOverlayPlayModule,
     VgBufferingModule,
-    MatTooltipModule
+    MatTooltipModule,
+    MatMenuModule,
+    MatPaginatorModule,
+    RatingModule
 
   ],
   declarations: [
@@ -75,11 +90,16 @@ import {CourseVideosComponent} from "../../course-videos/course-videos.component
     UploadVideoComponent,
     SaveVideoDetailsComponent,
     DialogContentExampleDialog,
+    DialogContentDeleteVideoDialog,
+    DialogContentDeleteUserDialog,
     VideoOfTheCourseComponent,
     VideoCardComponent,
     MyCourseComponent,
     VideoPlayerComponent,
-    CourseVideosComponent
+    CourseVideosComponent,
+    ViewAnswerComponent,
+    PaginatorOverviewExample,
+    AdminPanelComponent
 
   ],
   exports: [

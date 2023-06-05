@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.Id;
 
 import javax.persistence.*;
+import java.sql.Timestamp;
 
 @Entity
 @Table(name = "video_comments")
@@ -19,12 +20,18 @@ public class Comment {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @Column(name = "text")
-    private String text;
-
     @Column(name = "video_id")
-    private Long video_id;
+    private Long videoId;
+
+    @Column(name = "file_url")
+    private String fileUrl;
+
+    @Column(name = "date_upload")
+    private Timestamp dateUpload;
 
     @Column(name = "author_id")
-    private String authorId;
+    private Integer authorId;
+
+    @Column(name = "evaluation")
+    private Integer evaluation;
 }

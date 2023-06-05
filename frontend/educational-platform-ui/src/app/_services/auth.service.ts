@@ -39,9 +39,10 @@ login(credentials: { username: string, password: string }): Observable<any> {
 
   logout(): void {
     localStorage.removeItem('token')
+    localStorage.removeItem('id')
   }
 
-  register(registerData: { username: string, email : string, role : string[], password: string }): Observable<any> {
+  register(registerData: { username: string, email : string, password: string }): Observable<any> {
     return this.http.post(`${this.baseUrl}/registration`, registerData);
   }
 

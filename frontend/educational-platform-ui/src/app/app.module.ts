@@ -41,7 +41,7 @@ import {AdminLayoutModule} from "./layouts/admin-layout/admin-layout.module";
         LoginComponent,
         LogoutComponent,
         AdminLayoutComponent,
-        VideoDetailsComponent
+        VideoDetailsComponent,
 
     ],
   imports: [

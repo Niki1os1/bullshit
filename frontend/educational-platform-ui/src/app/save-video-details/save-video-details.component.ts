@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import {FormControl, FormGroup} from "@angular/forms";
 import {MatChipEditedEvent, MatChipInputEvent} from "@angular/material/chips";
 import {COMMA, ENTER} from '@angular/cdk/keycodes';
@@ -37,7 +37,6 @@ export class SaveVideoDetailsComponent{
     this.activatedRoute.params.subscribe(params => this.videoId= params['videoId']);
     this.videoService.getVideo(this.videoId).subscribe(data => {
       this.videoUrl = data.videoUrl.valueOf();
-      console.log(this.videoUrl)
       this.thumbnailUrl = data.thumbnailUrl;
     })
     this.saveVideoDetailsForm = new FormGroup({
@@ -50,12 +49,10 @@ export class SaveVideoDetailsComponent{
   add(event: MatChipInputEvent): void {
     const value = (event.value || '').trim();
 
-    // Add our fruit
     if (value) {
       this.tags.push(value);
     }
 
-    // Clear the input value
     event.chipInput!.clear();
   }
 
@@ -70,13 +67,11 @@ export class SaveVideoDetailsComponent{
   edit(tag: string, event: MatChipEditedEvent) {
     const value = event.value.trim();
 
-    // Remove fruit if it no longer has a name
     if (!value) {
       this.remove(tag);
       return;
     }
 
-    // Edit existing fruit
     const index = this.tags.indexOf(tag);
     if (index >= 0) {
       this.tags[index] = value;
@@ -91,7 +86,6 @@ export class SaveVideoDetailsComponent{
   }
 
   saveVideo() {
-    // Call the video service to make a http call to our backend
     const videoMetaData: VideoDto = {
       "id": this.videoId,
       "title": this.saveVideoDetailsForm.get('title')?.value,
@@ -105,19 +99,16 @@ export class SaveVideoDetailsComponent{
       // "viewCount": 0
     }
     this.videoService.saveVideo(videoMetaData).subscribe(data => {
-      this.matSnackBar.open("Video Metadata Updated successfully", "OK");
+      this.matSnackBar.open("Метаданные видео успешно обновлены", "OK");
     })
   }
 
   onUpload() {
     this.videoService.uploadThumbnail(this.selectedFile, this.videoId)
       .subscribe(data => {
-        console.log(data);
         this.thumbnailUrl = data.valueOf();
 
-        //show un upload success notification
-        this.matSnackBar.open("Thumbnail Upload Successful", "OK");
-        // this.router.navigateByUrl("/save-video-details/" + data.videoId);
+        this.matSnackBar.open("Загрузка заставки произошла успешно", "OK");
       });
   }
 }

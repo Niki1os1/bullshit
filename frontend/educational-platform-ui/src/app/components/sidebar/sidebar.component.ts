@@ -18,6 +18,10 @@ export class SidebarComponent implements OnInit {
     return  this.userRoles.includes('ROLE_TEACHER')
   }
 
+  isAdmin() {
+    return  this.userRoles.includes('ROLE_ADMIN')
+  }
+
   isAuthorized(): boolean {
     return !this.userService.getToken();
   }
@@ -37,6 +41,5 @@ export class SidebarComponent implements OnInit {
     }
     return true;
   };
-
 
 }

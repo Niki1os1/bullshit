@@ -1,32 +1,45 @@
 package com.vsu.coursework.service;
 
+import com.vsu.coursework.model.ERole;
+import com.vsu.coursework.model.Role;
 import com.vsu.coursework.model.User;
 import com.vsu.coursework.payload.dto.UserDto;
+import com.vsu.coursework.repository.RoleRepository;
 import com.vsu.coursework.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
+import java.util.Set;
 
 @Service
 @RequiredArgsConstructor
 public class UserService {
     private final UserRepository userRepository;
 
+    private final RoleRepository roleRepository;
+
     private UserDto mapToUserDto(User userById) {
         UserDto userDto = new UserDto();
+        userDto.setId(userById.getId());
         userDto.setEmail(userById.getEmail());
         userDto.setUsername(userById.getUsername());
         userDto.setFirst_name(userById.getFirstname());
         userDto.setLast_name(userById.getLastname());
 
+        Set<Role> roles = userById.getRoles();
+        List<String> roleNames = new ArrayList<>();
+
+        for (Role role : roles) {
+            roleNames.add(role.getName().name());
+        }
+
+        userDto.setRoles(roleNames);
+
         return userDto;
     }
-
-//    public List<UserDto> getUserById(Long userId) {
-//        return userRepository.findById(userId).stream().map(this::mapToUserDto).toList();
-//    }
-//
 
     private User getUserById(Long userId){
         return userRepository.findById(userId)
@@ -43,7 +56,7 @@ public class UserService {
         return mapToUserDto(user);
     }
 
-    public void editUser(String userId, UserDto userDto) {
+    public Long editUser(String userId, UserDto userDto) {
             User savedUser = getUserById(Long.parseLong(userId));
 
             if (savedUser != null) {
@@ -60,7 +73,34 @@ public class UserService {
             } else {
                 throw new IllegalArgumentException("User not found");
             }
+            return savedUser.getId();
         }
+
+    public Long editRoleUserById(String userId, String[] roles) {
+        User savedUser = getUserById(Long.parseLong(userId));
+
+        savedUser.getRoles().removeIf(role -> !role.getName().equals(ERole.ROLE_STUDENT));
+
+        if (roles != null && roles.length > 0) {
+            for (String roleName : roles) {
+                ERole roleEnum = ERole.valueOf(roleName);
+
+                Optional<Role> existingRoleOptional = roleRepository.findByName(roleEnum);
+                Role existingRole = existingRoleOptional.orElse(null);
+
+                savedUser.getRoles().add(existingRole);
+            }
+        }
+
+        userRepository.save(savedUser);
+
+        return savedUser.getId();
+    }
+
+    public Long deleteUserById(String userId) {
+        userRepository.deleteById(Long.parseLong(userId));
+        return Long.parseLong(userId);
+    }
 
 //    public void deleteVideoInCourse(Long courseId){
 //        ArrayList<String> keys = new ArrayList<>();

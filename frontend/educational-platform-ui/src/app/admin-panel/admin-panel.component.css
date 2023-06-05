@@ -1,0 +1,65 @@
+.half-hidden {
+  display: inline-block;
+  width: 50%;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  transform-origin: left;
+  transition: transform 0.3s ease;
+  transform: scaleX(0.8);
+}
+
+.fixed-width {
+  width: 180px; /* Задайте желаемую фиксированную ширину */
+  max-width: 180px; /* Добавьте максимальную ширину для предотвращения растяжения */
+}
+
+td {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/*td.fixed-width:hover {*/
+/*  overflow: visible;*/
+/*  white-space: normal;*/
+/*  cursor: pointer;*/
+/*}*/
+
+.half-hidden:hover {
+  width: 100%;
+  transform: scaleX(1);
+  white-space: normal;
+}
+
+.half-hidden:not(:hover) {
+  transition: transform 0.3s ease;
+  transform: scaleX(0.8);
+}
+
+
+.column-header {
+  display: flex;
+  align-items: center;
+}
+
+.column-title {
+  font-weight: bold;
+  margin-right: 8px;
+}
+
+.bold{
+  font-weight: bold;
+}
+
+.sort-icon {
+  display: flex;
+  align-items: center;
+  margin-left: 4px;
+}
+
+.sort-icon mat-icon {
+  font-size: 18px;
+  margin-left: 2px;
+  margin-bottom: 2px;
+}

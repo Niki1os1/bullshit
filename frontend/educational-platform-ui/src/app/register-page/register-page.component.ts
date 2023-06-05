@@ -10,7 +10,7 @@ import { AuthService } from '../_services/auth.service';
 })
 export class RegisterPageComponent {
   registerForm: FormGroup;
-  selectedRole: Set<string> = new Set<string>();
+  // selectedRole: Set<string> = new Set<string>();
 
   constructor(
     private formBuilder: FormBuilder,
@@ -21,7 +21,7 @@ export class RegisterPageComponent {
     this.registerForm = this.formBuilder.group({
       username: ['', [Validators.required, Validators.pattern(/^[a-zA-Z]{3,14}[0-9]{3,14}$/)]],
       email: ['', [Validators.required, Validators.email]],
-      role : [],
+      // role : [],
       password: ['', [Validators.required, Validators.minLength(6)]],
       confirmPassword: ['', Validators.required]
     }, {

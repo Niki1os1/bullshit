@@ -1,0 +1,38 @@
+.half-hidden-link {
+  display: inline-block;
+  width: 70%;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  cursor: pointer;
+  transform-origin: left;
+  transition: transform 0.3s ease;
+  transform: scaleX(0.8);
+}
+
+
+.fixed-width {
+  width: 200px;
+  max-width: 200px;
+}
+
+.column-header {
+  display: flex;
+  align-items: center;
+}
+
+.column-title {
+  margin-right: 8px;
+}
+
+.sort-icon {
+  display: flex;
+  align-items: center;
+  margin-left: 4px;
+}
+
+.sort-icon mat-icon {
+  font-size: 18px;
+  margin-left: 2px;
+  margin-bottom: 2px;
+}
