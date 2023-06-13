@@ -44,7 +44,7 @@ export class MyCourseComponent implements AfterViewInit{
   }
 
   ngAfterViewInit(): void {
-    const id = Number(this.cookieService.get('id'));
+    const id = Number(localStorage.getItem('id'));
     this.courseService.getCourseByUserId(id).subscribe(
       (courses: Course[]) => {
         this.courses = courses;

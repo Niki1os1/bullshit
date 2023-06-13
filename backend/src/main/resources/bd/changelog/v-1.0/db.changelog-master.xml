@@ -17,8 +17,4 @@
     <include file="src/main/resources/bd/changelog/v-1.0/31-changeset-video_tags-table.xml"/>
     <include file="src/main/resources/bd/changelog/v-1.0/32-changeset-video_comments-table.xml"/>
 
-
-
-
-
 </databaseChangeLog>

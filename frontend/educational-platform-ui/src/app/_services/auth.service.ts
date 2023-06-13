@@ -29,8 +29,6 @@ login(credentials: { username: string, password: string }): Observable<any> {
     return this.http.post<JwtResponse>(`${this.baseUrl}/login`, credentials).pipe(
       tap(response => {
         localStorage.setItem('token', response.token)
-        // this.cookieService.set('roles', JSON.stringify(response.roles));
-        // this.cookieService.set('email', response.email)
         localStorage.setItem('id', String(response.id))
       }),
       map(response => response.token)

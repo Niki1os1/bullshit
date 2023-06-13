@@ -8,6 +8,7 @@ import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -37,6 +38,7 @@ public class CourseController {
     }
 
     @GetMapping("/my/{userId}")
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_TEACHER')")
     public ResponseEntity<List<Course>> getCourseByUserId(@PathVariable Long userId) {
         List<Course> courses = courseService.getCoursesByUserId(userId);
         if (!courses.isEmpty()) {
@@ -47,11 +49,13 @@ public class CourseController {
     }
 
     @PostMapping
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_TEACHER')")
     public UploadFileResponse createCourse(@Valid @RequestParam("userId") String userId, @RequestParam("category") String category, @RequestParam("title") String title, @RequestParam("file") MultipartFile file) throws IOException {
         return courseService.saveCourse(Long.parseLong(userId), category, title, file);
     }
 
     @DeleteMapping("/{id}")
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_TEACHER')")
     public ResponseEntity<Void> deleteCourse(@PathVariable Long id) throws IOException {
         videoService.deleteVideoInCourse(id);
         courseService.deleteCourse(id);

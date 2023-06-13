@@ -3,6 +3,7 @@ package com.vsu.coursework.controller;
 import com.vsu.coursework.payload.dto.UserDto;
 import com.vsu.coursework.service.UserService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -31,26 +32,31 @@ public class UserController {
     }
 
     @PutMapping("/edit-user/{userId}")
+    @PreAuthorize("permitAll()")
     public Long editUser(@PathVariable String userId, @RequestBody UserDto userDto){
         return userService.editUser(userId, userDto);
     }
 
     @PutMapping("/edit-user/{userId}/role")
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     public Long editRoleUserById(@PathVariable String userId, @RequestBody String[] role){
         return userService.editRoleUserById(userId, role);
     }
 
     @GetMapping("/{userId}")
+    @PreAuthorize("permitAll()")
     public UserDto getUserById(@PathVariable String userId) {
         return userService.getUserDetails(userId);
     }
 
     @DeleteMapping("/{userId}")
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     public Long deleteUserById(@PathVariable String userId) {
         return userService.deleteUserById(userId);
     }
 
     @GetMapping("/all")
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     public List<UserDto> getAllUsers() {
         return userService.getAllUsers();
     }

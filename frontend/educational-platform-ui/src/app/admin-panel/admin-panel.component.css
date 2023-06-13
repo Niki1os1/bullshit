@@ -46,6 +46,7 @@ td {
 .column-title {
   font-weight: bold;
   margin-right: 8px;
+  cursor: pointer;
 }
 
 .bold{

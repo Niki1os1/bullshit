@@ -30,14 +30,13 @@ export class CourseCreateComponent {
 
   constructor(private courseService : CourseService,
               private formBuilder: FormBuilder,
-              private router: Router,
-              private cookieService: CookieService
+              private router: Router
   ) {
 
     this.data = this.formBuilder.group({
-      category: ['', [Validators.required, Validators.pattern(/^[-а-яА-ЯёЁ\s]{5,100}$/)]],
+      category: ['', [Validators.required, Validators.pattern(/^[-а-яА-ЯёЁ,.()\s]{5,300}$/)]],
       title: ['', [Validators.required, Validators.pattern(/^[-а-яА-ЯёЁ\s]{5,100}$/)]],
-      userId : this.cookieService.get('id')
+      userId : localStorage.getItem('id')
     });
   }
 

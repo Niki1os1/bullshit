@@ -22,7 +22,6 @@ public class User {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-
     @Column(name = "username")
     @NotBlank
     @Size(max = 20)
@@ -103,42 +102,4 @@ public User() {
         this.roles = roles;
     }
 
-
-//    @Override
-//    public Collection<? extends GrantedAuthority> getAuthorities() {
-//        return roles.stream()
-//                .map(role -> new SimpleGrantedAuthority(role.getName()))
-//                .collect(Collectors.toList());
-//    }
-
-//    @Override
-//    public String getUsername() {
-//        return null;
-//    }
-//
-//    @Override
-//    public boolean isAccountNonExpired() {
-//        return false;
-//    }
-//
-//    @Override
-//    public boolean isAccountNonLocked() {
-//        return false;
-//    }
-//
-//    @Override
-//    public boolean isCredentialsNonExpired() {
-//        return false;
-//    }
-//
-//    @Override
-//    public boolean isEnabled() {
-//        return false;
-//    }
-
-//    private Set<String> subscribedToUsers;
-//    private Set<String> subscribes;
-//    private List<String> videoHistory;
-//    private Set<String> likedVideos;
-//    private Set<String> dislikedVideos;
 }

@@ -23,6 +23,7 @@
 
 .column-title {
   margin-right: 8px;
+  cursor: pointer;
 }
 
 .sort-icon {

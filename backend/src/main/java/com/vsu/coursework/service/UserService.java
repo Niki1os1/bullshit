@@ -101,26 +101,4 @@ public class UserService {
         userRepository.deleteById(Long.parseLong(userId));
         return Long.parseLong(userId);
     }
-
-//    public void deleteVideoInCourse(Long courseId){
-//        ArrayList<String> keys = new ArrayList<>();
-//        List<Video> deletedVideo= videoRepository.findByCourseId(courseId);
-//        for(Video video : deletedVideo){
-//            if(video.getVideoUrl()!=null) {
-//                keys.add(extractFileNameFromUrl(video.getVideoUrl()));
-//            }
-//            if(video.getThumbnailUrl()!=null) {
-//                keys.add(extractFileNameFromUrl(video.getThumbnailUrl()));
-//            }
-//        }
-//        if(!keys.isEmpty()) {
-//            s3Service.deleteObjectsFromBucket(keys);
-//        }
-//        videoRepository.deleteAll(deletedVideo);
-//    }
-//
-//    public void deleteVideoById(){
-//
-//    }
-
 }
